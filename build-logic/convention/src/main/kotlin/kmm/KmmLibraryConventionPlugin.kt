@@ -1,6 +1,7 @@
 package kmm
 
 import com.android.build.gradle.LibraryExtension
+import com.codebox.speedrun.domain.app
 import com.codebox.speedrun.domain.configureKotlinAndroid
 import com.codebox.speedrun.domain.configureKotlinKmm
 import org.gradle.api.Plugin
@@ -13,7 +14,6 @@ class KmmLibraryConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
             with(pluginManager) {
-
                 apply("org.jetbrains.kotlin.multiplatform")
                 apply("org.jetbrains.kotlin.native.cocoapods")
                 apply("com.android.library")
@@ -24,6 +24,7 @@ class KmmLibraryConventionPlugin : Plugin<Project> {
             }
             extensions.configure<LibraryExtension> {
                 configureKotlinAndroid(this)
+                defaultConfig.targetSdk = app.targetSdk
             }
         }
     }

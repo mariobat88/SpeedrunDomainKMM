@@ -1,14 +1,14 @@
 package com.codebox.speedrun.domain.networking.api.categories
 
+import com.codebox.speedrun.domain.networking.api.models.CategoryDataListResponse
 import io.ktor.client.*
+import io.ktor.client.call.*
 import io.ktor.client.request.*
-import io.ktor.client.statement.*
 
-internal class CategoriesApiService(
+class CategoriesApiService(
     private val httpClient: HttpClient,
 ) {
-    suspend fun getCategories(gameId: String): String {
-        val response = httpClient.get("games/${gameId}/categories")
-        return response.bodyAsText()
+    suspend fun getCategories(gameId: String): CategoryDataListResponse {
+        return httpClient.get("games/${gameId}/categories").body()
     }
 }

@@ -1,26 +1,20 @@
 plugins {
     id("kmm.library")
 }
-
 kotlin {
     cocoapods {
-        summary = "DI module"
+        summary = "Repository module"
         homepage = "Link to the Shared Module homepage"
         version = "1.0"
         ios.deploymentTarget = "14.1"
         framework {
-            baseName = "di"
+            baseName = "repo"
         }
     }
-
+    
     sourceSets {
-        val commonMain by getting {
-            dependencies {
-                implementation(projects.shared.data.datasource)
-                implementation(projects.shared.networking.api)
-                implementation(libs.io.insert.koin.core)
-            }
-        }
+        val commonMain by getting
+
         val androidMain by getting
         val iosX64Main by getting
         val iosArm64Main by getting

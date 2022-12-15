@@ -1,5 +1,6 @@
 package com.codebox.speedrun.domain.networking.di
 
+import com.codebox.speedrun.domain.networking.api.categories.CategoriesApiService
 import io.github.aakira.napier.DebugAntilog
 import io.github.aakira.napier.Napier
 import io.ktor.client.*
@@ -42,4 +43,5 @@ val networkingModule: Module = module {
             }
         }
     }
+    single { CategoriesApiService(get()) }
 }

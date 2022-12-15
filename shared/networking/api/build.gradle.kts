@@ -1,5 +1,6 @@
 plugins {
     id("kmm.library")
+    kotlin("plugin.serialization") version "1.4.32"
 }
 
 kotlin {
@@ -20,7 +21,6 @@ kotlin {
                 implementation(libs.io.ktor.client.logging)
                 implementation(libs.io.ktor.client.content.negotiation)
                 implementation(libs.io.ktor.client.serialization.json)
-                //implementation(libs.kotlinx.coroutines)
                 implementation(libs.io.insert.koin.core)
                 implementation(libs.io.github.aakira.napier)
             }

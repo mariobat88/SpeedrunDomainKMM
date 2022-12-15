@@ -4,20 +4,21 @@ plugins {
 
 kotlin {
     cocoapods {
-        summary = "DI module"
+        summary = "Datasource module"
         homepage = "Link to the Shared Module homepage"
         version = "1.0"
         ios.deploymentTarget = "14.1"
         framework {
-            baseName = "di"
+            baseName = "datasource"
         }
     }
 
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation(projects.shared.data.datasource)
+                implementation(projects.shared.data.repo)
                 implementation(projects.shared.networking.api)
+                implementation(libs.kotlinx.coroutines)
                 implementation(libs.io.insert.koin.core)
             }
         }

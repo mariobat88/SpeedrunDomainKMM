@@ -4,24 +4,27 @@ plugins {
 
 kotlin {
     cocoapods {
-        summary = "DI module"
+        summary = "Framework module"
         homepage = "Link to the Shared Module homepage"
         version = "1.0"
         ios.deploymentTarget = "14.1"
         framework {
-            baseName = "di"
+            baseName = "framework"
         }
     }
-
+    
     sourceSets {
-        val commonMain by getting {
-            dependencies {
-                implementation(projects.shared.data.datasource)
-                implementation(projects.shared.networking.api)
-                implementation(libs.io.insert.koin.core)
+        val commonMain by getting{
+            dependencies{
+                implementation(libs.kotlinx.coroutines)
             }
         }
-        val androidMain by getting
+        val androidMain by getting{
+            dependencies{
+                implementation(libs.androidx.lifecycle.lifecycle.viewmodel)
+                implementation(libs.androidx.lifecycle.lifecycle.viewmodel.ktx)
+            }
+        }
         val iosX64Main by getting
         val iosArm64Main by getting
         val iosSimulatorArm64Main by getting
@@ -30,6 +33,9 @@ kotlin {
             iosX64Main.dependsOn(this)
             iosArm64Main.dependsOn(this)
             iosSimulatorArm64Main.dependsOn(this)
+            dependencies{
+                implementation(libs.org.jetbrains.kotlin.kotlin.stdlib)
+            }
         }
     }
 }

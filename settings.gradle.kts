@@ -1,6 +1,5 @@
 @file:Suppress("UnstableApiUsage")
 
-
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 enableFeaturePreview("VERSION_CATALOGS")
 
@@ -10,6 +9,7 @@ pluginManagement {
         google()
         gradlePluginPortal()
         mavenCentral()
+
     }
 }
 
@@ -24,6 +24,10 @@ dependencyResolutionManagement {
 rootProject.name = "SpeedrunDomain"
 include(":androidApp")
 include(":di")
+include(":shared")
+include(":shared:core:framework")
+include(":shared:data:datasource")
+include(":shared:data:repo")
 include(":shared:networking:api")
 include(":core:annotations")
 include(":core:designsystem")

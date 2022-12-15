@@ -14,6 +14,7 @@ hilt = "2.42"
 javax = "1"
 koin = "3.2.0"
 kotlin = "1.7.20"
+kotlin-stdlib = "1.2.30"
 kotlinxCoroutines = "1.6.4"
 io-github-aakira = "2.6.1"
 io-insert-koin = "3.2.0"
@@ -37,6 +38,7 @@ io-ktor-client-content-negotiation = { group = "io.ktor", name = "ktor-client-co
 io-insert-koin-core = { group = "io.insert-koin", name = "koin-core", version.ref = "io-insert-koin" }
 kotlinx-coroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinxCoroutines" }
 io-github-aakira-napier = { group = "io.github.aakira", name = "napier", version.ref = "io-github-aakira" }
+org-jetbrains-kotlin-kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref = "kotlin-stdlib" }
 
 #Android
 androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "androidxCompose" }
@@ -57,6 +59,8 @@ androidx-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-toolin
 androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
 androidx-core-splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "splashscreen" }
 androidx-hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "androidxHiltNavigationCompose" }
+androidx-lifecycle-lifecycle-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel", version.ref = "lifecycle" }
+androidx-lifecycle-lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
 androidx-lifecycle-compose-runtime = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "lifecycle" }
 androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigation" }
 androidx-paging-pagingCompose = { group = "androidx.paging", name = "paging-compose", version.ref = "composePaging" }
