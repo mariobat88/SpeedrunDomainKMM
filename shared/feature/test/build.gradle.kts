@@ -1,6 +1,5 @@
 plugins {
     id("kmm.library")
-    id("speedrun.domain.android.library.compose")
 }
 
 kotlin {
@@ -20,6 +19,7 @@ kotlin {
             dependencies{
                 implementation(projects.shared.core.base)
                 implementation(projects.shared.data.repo)
+                implementation(projects.shared.di)
                 implementation(libs.kotlinx.coroutines)
             }
         }

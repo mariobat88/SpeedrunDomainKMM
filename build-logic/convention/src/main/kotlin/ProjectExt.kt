@@ -33,7 +33,6 @@ fun Project.configureKotlinAndroid(
     commonExtension: CommonExtension<*, *, *, *>,
 ) {
     commonExtension.apply {
-        //namespace = "com.speedrun.domain"
         compileSdk = app.compileSdk
 
         defaultConfig {

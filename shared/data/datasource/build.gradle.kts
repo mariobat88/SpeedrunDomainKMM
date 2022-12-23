@@ -1,6 +1,5 @@
 plugins {
     id("kmm.library")
-    id("speedrun.domain.android.library")
 }
 
 kotlin {

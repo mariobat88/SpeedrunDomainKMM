@@ -54,7 +54,7 @@ dependencies {
     implementation(projects.core.framework)
     implementation(projects.core.initializer)
     implementation(projects.shared.di)
-    implementation(projects.shared.feature.test)
+    implementation(projects.feature.myFeature)
 //    implementation(projects.core.navigation)
 //    implementation(projects.core.wrapper.logging)
 //    implementation(projects.data.database)

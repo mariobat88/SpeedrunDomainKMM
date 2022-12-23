@@ -10,12 +10,10 @@ import io.ktor.client.plugins.logging.*
 import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
 import kotlinx.serialization.json.Json
-import org.koin.core.module.Module
-import org.koin.core.module.dsl.singleOf
-import org.koin.dsl.module
 
-val networkingModule: Module = module {
-    singleOf<HttpClient> {
+class NetworkingModule {
+
+    private val httpClient by lazy {
         HttpClient {
             install(Logging) {
                 logger = object : Logger {
@@ -43,5 +41,8 @@ val networkingModule: Module = module {
             }
         }
     }
-    single { CategoriesApiService(get()) }
+
+    val categoriesApiService by lazy {
+        CategoriesApiService(httpClient)
+    }
 }

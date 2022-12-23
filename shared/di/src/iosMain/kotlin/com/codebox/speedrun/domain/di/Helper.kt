@@ -1,7 +1,6 @@
 package com.codebox.speedrun.domain.di
 
 import com.codebox.speedrun.domain.Greeting
-import com.codebox.speedrun.domain.MyViewModel
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.koin.core.context.startKoin

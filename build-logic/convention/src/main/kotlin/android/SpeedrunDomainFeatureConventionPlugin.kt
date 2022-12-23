@@ -12,7 +12,6 @@ class SpeedrunDomainFeatureConventionPlugin : Plugin<Project> {
         with(target) {
             with(pluginManager) {
                 apply("speedrun.domain.android.library.compose")
-                apply("speedrun.domain.android.hilt")
             }
 
             val libs = extensions.getByType(VersionCatalogsExtension::class).named("libs")
@@ -27,10 +26,10 @@ class SpeedrunDomainFeatureConventionPlugin : Plugin<Project> {
                 add("implementation", libs.findLibrary("androidx.hilt.navigation.compose").get())
                 add("implementation", libs.findLibrary("androidx.lifecycle.compose.runtime").get())
                 add("implementation", project(":core:designsystem"))
-                add("implementation", project(":core:framework"))
-                add("implementation", project(":core:navigation"))
-                add("implementation", project(":core:ui"))
-                add("implementation", project(":core:wrapper:dispatchers"))
+                add("implementation", project(":shared:di"))
+                //add("implementation", project(":core:navigation"))
+                //add("implementation", project(":core:ui"))
+                //add("implementation", project(":core:wrapper:dispatchers"))
             }
         }
     }

@@ -1,6 +1,5 @@
 plugins {
     id("kmm.library")
-    id("speedrun.domain.android.library")
 }
 
 kotlin {
@@ -23,7 +22,7 @@ kotlin {
         }
         val androidMain by getting{
             dependencies{
-                implementation(libs.androidx.lifecycle.lifecycle.viewmodel)
+                api(libs.androidx.lifecycle.lifecycle.viewmodel)
                 implementation(libs.androidx.lifecycle.lifecycle.viewmodel.ktx)
             }
         }
@@ -40,8 +39,4 @@ kotlin {
             }
         }
     }
-}
-
-android{
-    namespace = "com.codebox.speedrun.domain.shared"
 }

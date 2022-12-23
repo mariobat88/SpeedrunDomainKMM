@@ -1,3 +1,5 @@
+import com.codebox.speedrun.domain.configureAndroidCompose
+
 plugins {
     id("kmm.library")
 }
@@ -17,9 +19,10 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
+                implementation(projects.shared.core.base)
                 implementation(projects.shared.data.datasource)
+                implementation(projects.shared.data.repo)
                 implementation(projects.shared.networking.api)
-                implementation(projects.shared.feature.test)
             }
         }
         val androidMain by getting
