@@ -2,4 +2,9 @@ target 'iosApp' do
   use_frameworks!
   platform :ios, '14.1'
   pod 'api', :path => '../shared/networking/api'
+  pod 'datasource', :path => '../shared/data/datasource'
+  pod 'di', :path => '../shared/di'
+  pod 'base', :path => '../shared/core/base'
+  pod 'repo', :path => '../shared/data/repo'
+  pod 'test', :path => '../shared/feature/test'
 end

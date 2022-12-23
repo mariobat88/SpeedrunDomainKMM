@@ -11,6 +11,7 @@ kotlin {
         ios.deploymentTarget = "14.1"
         framework {
             baseName = "api"
+            isStatic = false
         }
     }
 
@@ -21,7 +22,6 @@ kotlin {
                 implementation(libs.io.ktor.client.logging)
                 implementation(libs.io.ktor.client.content.negotiation)
                 implementation(libs.io.ktor.client.serialization.json)
-                implementation(libs.io.insert.koin.core)
                 implementation(libs.io.github.aakira.napier)
             }
         }

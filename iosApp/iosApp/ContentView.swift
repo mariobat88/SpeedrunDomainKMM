@@ -1,10 +1,12 @@
 import SwiftUI
+import test
+import di
 
 struct ContentView: View {
-	//let greet = Greeting().greeting()
-
+    let testViewModel = TestViewModelComponent().testViewModel()
+    
 	var body: some View {
-		Text("greet")
+        Text("greet")
 	}
 }
 

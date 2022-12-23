@@ -23,11 +23,12 @@ dependencyResolutionManagement {
 
 rootProject.name = "SpeedrunDomain"
 include(":androidApp")
-include(":di")
 include(":shared")
-include(":shared:core:framework")
+include(":shared:core:base")
+include(":shared:feature:test")
 include(":shared:data:datasource")
 include(":shared:data:repo")
+include(":shared:di")
 include(":shared:networking:api")
 include(":core:annotations")
 include(":core:designsystem")

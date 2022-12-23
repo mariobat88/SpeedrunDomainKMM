@@ -22,9 +22,11 @@ class KmmLibraryConventionPlugin : Plugin<Project> {
             extensions.configure<KotlinMultiplatformExtension> {
                 configureKotlinKmm(this)
             }
+
             extensions.configure<LibraryExtension> {
                 configureKotlinAndroid(this)
                 defaultConfig.targetSdk = app.targetSdk
+                sourceSets.getByName("main").manifest.srcFile("src\\androidMain\\AndroidManifest.xml")
             }
         }
     }

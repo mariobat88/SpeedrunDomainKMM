@@ -1,0 +1,7 @@
+${PODS_ROOT}/Target Support Files/Pods-iosApp/Pods-iosApp-frameworks.sh
+${PODS_ROOT}/../../shared/networking/api/build/cocoapods/framework/api.framework
+${PODS_ROOT}/../../shared/core/base/build/cocoapods/framework/framework.framework
+${PODS_ROOT}/../../shared/data/datasource/build/cocoapods/framework/datasource.framework
+${PODS_ROOT}/../../shared/di/build/cocoapods/framework/di.framework
+${PODS_ROOT}/../../shared/data/repo/build/cocoapods/framework/repo.framework
+${PODS_ROOT}/../../shared/feature/test/build/cocoapods/framework/test.framework

@@ -1,3 +1,4 @@
+
 plugins {
     id("kmm.library")
 }
@@ -9,9 +10,10 @@ kotlin {
         ios.deploymentTarget = "14.1"
         framework {
             baseName = "repo"
+            isStatic = false
         }
     }
-    
+
     sourceSets {
         val commonMain by getting
 

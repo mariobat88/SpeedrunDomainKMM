@@ -12,12 +12,10 @@ coil = "2.1.0"
 composePaging = "1.0.0-alpha14"
 hilt = "2.42"
 javax = "1"
-koin = "3.2.0"
 kotlin = "1.7.20"
 kotlin-stdlib = "1.2.30"
 kotlinxCoroutines = "1.6.4"
 io-github-aakira = "2.6.1"
-io-insert-koin = "3.2.0"
 io-ktor = "2.1.3"
 lifecycle = "2.6.0-alpha01"
 material3 = "1.6.1"
@@ -35,7 +33,6 @@ io-ktor-client-core = { group = "io.ktor", name = "ktor-client-core", version.re
 io-ktor-client-logging = { group = "io.ktor", name = "ktor-client-logging", version.ref = "io-ktor" }
 io-ktor-client-serialization-json = { group = "io.ktor", name = "ktor-serialization-kotlinx-json", version.ref = "io-ktor" }
 io-ktor-client-content-negotiation = { group = "io.ktor", name = "ktor-client-content-negotiation", version.ref = "io-ktor" }
-io-insert-koin-core = { group = "io.insert-koin", name = "koin-core", version.ref = "io-insert-koin" }
 kotlinx-coroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinxCoroutines" }
 io-github-aakira-napier = { group = "io.github.aakira", name = "napier", version.ref = "io-github-aakira" }
 org-jetbrains-kotlin-kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref = "kotlin-stdlib" }
@@ -69,7 +66,6 @@ hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref
 hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
 hilt-gradlePlugin = { group = "com.google.dagger", name = "hilt-android-gradle-plugin", version.ref = "hilt" }
 javax-inject = { module = "javax.inject:javax.inject", version.ref = "javax" }
-io-insert-koin-android = { group = "io.insert-koin", name = "koin-core-android", version.ref = "koin" }
 kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "kotlinxCoroutines" }
 io-ktor-client-http = { group = "io.ktor", name = "ktor-client-okhttp", version.ref = "io-ktor" }

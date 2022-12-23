@@ -37,7 +37,7 @@ val networkingModule: Module = module {
             }
             defaultRequest {
                 url {
-                    this.host = "https://www.speedrun.com/api/v1/"
+                    host = "www.speedrun.com/api/v1"
                     protocol = URLProtocol.HTTPS
                 }
             }

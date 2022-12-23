@@ -2,8 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.codebox.speedrun.domain">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
+        android:name="com.codebox.speedrun.android.SpeedrunApplication"
         android:allowBackup="false"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity

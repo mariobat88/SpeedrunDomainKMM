@@ -1,5 +1,6 @@
 plugins {
     id("kmm.library")
+    id("speedrun.domain.android.library")
 }
 
 kotlin {
@@ -10,6 +11,7 @@ kotlin {
         ios.deploymentTarget = "14.1"
         framework {
             baseName = "datasource"
+            isStatic = false
         }
     }
 
@@ -19,7 +21,6 @@ kotlin {
                 implementation(projects.shared.data.repo)
                 implementation(projects.shared.networking.api)
                 implementation(libs.kotlinx.coroutines)
-                implementation(libs.io.insert.koin.core)
             }
         }
         val androidMain by getting

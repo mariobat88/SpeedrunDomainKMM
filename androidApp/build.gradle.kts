@@ -2,8 +2,6 @@ import com.codebox.speedrun.domain.app
 
 plugins {
     id("speedrun.domain.android.application.compose")
-    id("dagger.hilt.android.plugin")
-    kotlin("kapt")
 }
 
 android {
@@ -49,13 +47,14 @@ dependencies {
     implementation(libs.androidx.core.splashscreen)
     implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.androidx.navigation.compose)
-    implementation(libs.hilt.android)
     implementation(libs.material3)
 
     implementation(projects.core.annotations)
     implementation(projects.core.designsystem)
     implementation(projects.core.framework)
     implementation(projects.core.initializer)
+    implementation(projects.shared.di)
+    implementation(projects.shared.feature.test)
 //    implementation(projects.core.navigation)
 //    implementation(projects.core.wrapper.logging)
 //    implementation(projects.data.database)
@@ -67,5 +66,4 @@ dependencies {
 //    implementation(projects.feature.run)
 //    implementation(projects.networking.core)
 //
-    kapt(libs.hilt.compiler)
 }

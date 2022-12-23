@@ -1,16 +1,41 @@
 PODS:
-  - shared (1.0)
+  - api (1.0)
+  - base (1.0)
+  - datasource (1.0)
+  - di (1.0)
+  - repo (1.0)
+  - test (1.0)
 
 DEPENDENCIES:
-  - shared (from `../shared`)
+  - api (from `../shared/networking/api`)
+  - base (from `../shared/core/base`)
+  - datasource (from `../shared/data/datasource`)
+  - di (from `../shared/di`)
+  - repo (from `../shared/data/repo`)
+  - test (from `../shared/feature/test`)
 
 EXTERNAL SOURCES:
-  shared:
-    :path: "../shared"
+  api:
+    :path: "../shared/networking/api"
+  base:
+    :path: "../shared/core/base"
+  datasource:
+    :path: "../shared/data/datasource"
+  di:
+    :path: "../shared/di"
+  repo:
+    :path: "../shared/data/repo"
+  test:
+    :path: "../shared/feature/test"
 
 SPEC CHECKSUMS:
-  shared: 2d3b24a8fe27b7d9e65b8d075a9672fbc6a1aa10
+  api: 7ab5bbfc902b0430f4c45d54d85ef125645070ca
+  base: 2c03311e1322c757fea431fc142dd6addfb19919
+  datasource: cb5b6e84fbdbe2e6194a1937569d999fb3e4e899
+  di: d7a2b0e0cf00691d0c6d72a2e6816cdc2bb225b1
+  repo: 285e63bd805e4b5cf3dad907e2ed1d48f7f9ffb6
+  test: 77b6625fb3552ffa7709b863c2334ac33c51dd68
 
-PODFILE CHECKSUM: f282da88f39e69507b0a255187c8a6b644477756
+PODFILE CHECKSUM: bc333cd72f8ce364bcc9021ea98610948fe85f11
 
 COCOAPODS: 1.11.3

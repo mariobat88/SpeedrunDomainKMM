@@ -11,7 +11,7 @@ class CategoriesRepositoryImpl(
 
     //TODO: Inject and change dispatchers
     override suspend fun refreshCategoriesByGame(gameId: String) = withContext(Dispatchers.Default) {
-        categoriesApiService.getCategories(gameId)
+        val categories = categoriesApiService.getCategories("nxd1rk8q")
         Unit
     }
 }
