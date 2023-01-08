@@ -1,6 +1,7 @@
 package com.codebox.speedrun.domain.networking.di
 
 import com.codebox.speedrun.domain.networking.api.categories.CategoriesApiService
+import com.codebox.speedrun.domain.networking.api.games.GamesApiService
 import io.github.aakira.napier.DebugAntilog
 import io.github.aakira.napier.Napier
 import io.ktor.client.*
@@ -44,5 +45,9 @@ class NetworkingModule {
 
     val categoriesApiService by lazy {
         CategoriesApiService(httpClient)
+    }
+
+    val gamesApiService by lazy {
+        GamesApiService(httpClient)
     }
 }

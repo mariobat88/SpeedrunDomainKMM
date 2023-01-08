@@ -1,6 +1,6 @@
 package com.codebox.speedrun.domain.data.datasource.categories
 
-import com.codebox.speedrun.domain.data.repo.CategoriesRepository
+import com.codebox.speedrun.domain.data.repo.categories.CategoriesRepository
 import com.codebox.speedrun.domain.networking.api.categories.CategoriesApiService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

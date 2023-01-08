@@ -26,9 +26,10 @@ class SpeedrunDomainFeatureConventionPlugin : Plugin<Project> {
                 add("implementation", libs.findLibrary("androidx.hilt.navigation.compose").get())
                 add("implementation", libs.findLibrary("androidx.lifecycle.compose.runtime").get())
                 add("implementation", project(":core:designsystem"))
+                add("implementation", project(":core:ui"))
+                add("implementation", project(":core:framework"))
+                add("implementation", project(":shared:core:navigation"))
                 add("implementation", project(":shared:di"))
-                //add("implementation", project(":core:navigation"))
-                //add("implementation", project(":core:ui"))
                 //add("implementation", project(":core:wrapper:dispatchers"))
             }
         }

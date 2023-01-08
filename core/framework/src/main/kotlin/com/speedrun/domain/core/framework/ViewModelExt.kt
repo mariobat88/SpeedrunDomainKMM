@@ -6,8 +6,9 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
-import com.speedrun.domain.core.framework.navigation.NavigationState
-import com.speedrun.domain.core.framework.navigation.StateNavigator
+import com.codebox.speedrun.domain.core.framework.SpeedrunViewModel
+import com.codebox.speedrun.domain.core.framework.navigation.NavigationState
+import com.codebox.speedrun.domain.core.framework.navigation.StateNavigator
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.launch
@@ -52,7 +53,8 @@ fun Navigation(
 ) {
     when (val navigationState = stateNavigator.navigationState.collectAsState().value) {
         is NavigationState.NavigateToRoute -> {
-            navController.navigate(navigationState.route, navigationState.navOptions)
+            //navController.navigate(navigationState.route, navigationState.navOptions)
+            navController.navigate(navigationState.route)
             stateNavigator.onNavigated(navigationState)
         }
         is NavigationState.PopToRoute -> {

@@ -3,7 +3,7 @@ import test
 import di
 
 struct ContentView: View {
-    let testViewModel = TestViewModelComponent().testViewModel()
+    //let testViewModel = TestViewModelComponent().testViewModel()
     
 	var body: some View {
         Text("greet")

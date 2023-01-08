@@ -1,0 +1,13 @@
+CREATE TABLE CategoryEntity (
+    id              TEXT NOT NULL,
+    name            TEXT    NOT NULL,
+    weblink         TEXT    NOT NULL,
+    type            TEXT    NOT NULL,
+    rules           TEXT,
+    miscellaneous   INTEGER AS Boolean DEFAULT NULL,
+    gameId          TEXT    NOT NULL
+);
+
+upsertCategory:
+INSERT OR REPLACE INTO CategoryEntity(id, name, weblink, type, rules, miscellaneous, gameId)
+VALUES (?, ?, ?, ?, ?, ?, ?);

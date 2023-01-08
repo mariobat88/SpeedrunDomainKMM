@@ -17,6 +17,8 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
+                implementation(projects.shared.data.common)
+                implementation(projects.shared.data.database)
                 implementation(projects.shared.data.repo)
                 implementation(projects.shared.networking.api)
                 implementation(libs.kotlinx.coroutines)

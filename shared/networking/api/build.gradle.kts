@@ -23,6 +23,7 @@ kotlin {
                 implementation(libs.io.ktor.client.content.negotiation)
                 implementation(libs.io.ktor.client.serialization.json)
                 implementation(libs.io.github.aakira.napier)
+                implementation(projects.shared.data.common)
             }
         }
         val androidMain by getting {

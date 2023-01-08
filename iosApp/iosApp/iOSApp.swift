@@ -1,17 +1,14 @@
 import SwiftUI
 import di
-import test
 
 @main
-struct iOSApp: App {
+struct iOSApp: App{
 
-    init() {
-        HelperKt.doInitKoin()
-    }
+    var appComponent: AppComponent = AppComponentImpl()
     
 	var body: some Scene {
 		WindowGroup {
-			ContentView()
+			 MyFeatureScreen()
 		}
 	}
 }

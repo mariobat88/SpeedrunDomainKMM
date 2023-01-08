@@ -25,6 +25,7 @@ okhttp = "4.10.0"
 retrofit = "2.9.0"
 room = "2.4.3"
 splashscreen = "1.0.0"
+sqlDelight = "1.5.4"
 timber = "5.0.1"
 
 [libraries]
@@ -36,6 +37,9 @@ io-ktor-client-content-negotiation = { group = "io.ktor", name = "ktor-client-co
 kotlinx-coroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinxCoroutines" }
 io-github-aakira-napier = { group = "io.github.aakira", name = "napier", version.ref = "io-github-aakira" }
 org-jetbrains-kotlin-kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref = "kotlin-stdlib" }
+com-squareup-sqldelight-runtime = { group = "com.squareup.sqldelight", name = "runtime", version.ref = "sqlDelight" }
+com-squareup-sqldelight-coroutines-extensions = { group = "com.squareup.sqldelight", name = "coroutines-extensions", version.ref = "sqlDelight" }
+com-squareup-sqldelight-gradle-plugin = { group = "com.squareup.sqldelight", name = "gradle-plugin", version.ref = "sqlDelight" }
 
 #Android
 androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "androidxCompose" }
@@ -80,9 +84,9 @@ retrofit-converterMoshi = { group = "com.squareup.retrofit2", name = "converter-
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
+com-squareup-sqldelight-android-driver = { group = "com.squareup.sqldelight", name = "android-driver", version.ref = "sqlDelight" }
 timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
 
 #iOS
 io-ktor-client-darwin = { group = "io.ktor", name = "ktor-client-darwin", version.ref = "io-ktor" }
-
-
+com-squareup-sqldelight-native-driver = { group = "com.squareup.sqldelight", name = "native-driver", version.ref = "sqlDelight" }

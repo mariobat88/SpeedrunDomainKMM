@@ -1,6 +1,6 @@
 package com.codebox.speedrun.domain.networking.api.categories
 
-import com.codebox.speedrun.domain.networking.api.models.CategoryDataListResponse
+import com.codebox.speedrun.domain.networking.api.categories.models.CategoryDataListResponse
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.request.*
