@@ -1,5 +1,6 @@
 plugins {
     id("kmm.library")
+    kotlin("plugin.serialization") version "1.4.32"
 }
 
 kotlin {
@@ -15,6 +16,10 @@ kotlin {
     }
 
     sourceSets {
-        val commonMain by getting
+        val commonMain by getting{
+            dependencies{
+                implementation(libs.io.ktor.client.serialization.json)
+            }
+        }
     }
 }

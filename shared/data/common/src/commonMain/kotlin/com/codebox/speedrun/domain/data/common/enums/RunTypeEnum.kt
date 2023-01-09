@@ -1,15 +1,11 @@
-package com.speedrun.data.common.enums
+package com.codebox.speedrun.domain.data.common.enums
 
-enum class RunTypeEnum(val jsonValue: String) {
-    PER_LEVEL("per-level"),
-    PER_GAME("per-game"),
-    UNKNOWN("unknown");
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-    companion object {
-        fun fromJsonValue(str: String?) = when (str) {
-            PER_LEVEL.jsonValue -> PER_LEVEL
-            PER_GAME.jsonValue -> PER_GAME
-            else -> UNKNOWN
-        }
-    }
+@Serializable
+enum class RunTypeEnum {
+    @SerialName("per-level") PER_LEVEL,
+    @SerialName("per-game") PER_GAME,
+    @SerialName("unknown") UNKNOWN;
 }

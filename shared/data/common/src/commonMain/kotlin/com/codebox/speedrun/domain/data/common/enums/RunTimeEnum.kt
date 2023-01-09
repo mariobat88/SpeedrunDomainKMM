@@ -1,15 +1,12 @@
 package com.codebox.speedrun.domain.data.common.enums
 
-enum class RunTimeEnum(val jsonValue: String) {
-    REALTIME("realtime"),
-    INGAME("ingame"),
-    UNKNOWN("unknown");
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-    companion object {
-        fun fromJsonValue(str: String?) = when (str) {
-            REALTIME.jsonValue -> REALTIME
-            INGAME.jsonValue -> INGAME
-            else -> UNKNOWN
-        }
-    }
+@Serializable
+enum class RunTimeEnum {
+    @SerialName("realtime") REALTIME,
+    @SerialName("realtime_noloads") REALTIME_NOLOADS,
+    @SerialName("ingame") INGAME,
+    @SerialName("unknown") UNKNOWN;
 }
