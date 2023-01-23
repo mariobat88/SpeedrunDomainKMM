@@ -1,6 +1,5 @@
 package com.codebox.speedrun.domain.core.framework.navigation
 
-import java.util.*
 import kotlin.random.Random
 
 /**

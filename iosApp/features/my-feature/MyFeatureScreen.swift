@@ -7,11 +7,18 @@
 //
 
 import SwiftUI
-import test
+import di
+import app
+import dashboard
 
 struct MyFeatureScreen : View {
     
-    let testViewModel = TestViewModel.companion.create(appComponent: ((UIApplication.shared) as! iOSApp).appComponent as! DiAppComponent)
+    var dashboardViewModel: DashboardViewModel
+    
+    init<T: AppNavigator>(dashboardNavigator: T){
+        dashboardViewModel = DashboardViewModel.companion.create(dashboardNavigator: dashboardNavigator as! DashboardNavigator)
+    }
+  
     
     var body: some View {
         Text("greet")

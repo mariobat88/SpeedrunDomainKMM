@@ -6,14 +6,14 @@ Pod::Spec.new do |spec|
     spec.authors                  = ''
     spec.license                  = ''
     spec.summary                  = 'Navigation module'
-    spec.vendored_frameworks      = 'build/cocoapods/framework/framework.framework'
+    spec.vendored_frameworks      = 'build/cocoapods/framework/navigation.framework'
     spec.libraries                = 'c++'
     spec.ios.deployment_target = '14.1'
                 
                 
     spec.pod_target_xcconfig = {
         'KOTLIN_PROJECT_PATH' => ':shared:core:navigation',
-        'PRODUCT_MODULE_NAME' => 'framework',
+        'PRODUCT_MODULE_NAME' => 'navigation',
     }
                 
     spec.script_phases = [

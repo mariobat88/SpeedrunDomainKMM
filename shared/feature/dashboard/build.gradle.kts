@@ -11,6 +11,7 @@ kotlin {
         framework {
             baseName = "dashboard"
             isStatic = false
+            linkerOpts.add("-lsqlite3")
         }
     }
 

@@ -9,8 +9,9 @@ kotlin {
         version = "1.0"
         ios.deploymentTarget = "14.1"
         framework {
-            baseName = "framework"
+            baseName = "navigation"
             isStatic = false
+            linkerOpts.add("-lsqlite3")
         }
     }
 

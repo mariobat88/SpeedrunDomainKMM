@@ -4,13 +4,14 @@ plugins {
 
 kotlin {
     cocoapods {
-        summary = "Framework module"
+        summary = "Foundation module"
         homepage = "Link to the Shared Module homepage"
         version = "1.0"
         ios.deploymentTarget = "14.1"
         framework {
-            baseName = "framework"
+            baseName = "foundation"
             isStatic = false
+            linkerOpts.add("-lsqlite3")
         }
     }
     

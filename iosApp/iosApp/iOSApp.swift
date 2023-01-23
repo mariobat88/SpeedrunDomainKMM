@@ -1,14 +1,18 @@
 import SwiftUI
 import di
+import database
+import app
+import dashboard
 
 @main
 struct iOSApp: App{
 
-    var appComponent: AppComponent = AppComponentImpl()
+    let appComponent: AppComponent = AppComponentImpl(databaseDriverFactory: DatabaseDatabaseDriverFactory())
+    let appViewModel = AppViewModel.companion.create()
     
 	var body: some Scene {
 		WindowGroup {
-			 MyFeatureScreen()
+            MyFeatureScreen(dashboardNavigator: appViewModel)
 		}
 	}
 }

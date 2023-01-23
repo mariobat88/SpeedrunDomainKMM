@@ -11,6 +11,7 @@ kotlin {
         framework {
             baseName = "app"
             isStatic = false
+            linkerOpts.add("-lsqlite3")
         }
     }
 

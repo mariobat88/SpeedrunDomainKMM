@@ -12,6 +12,7 @@ kotlin {
         framework {
             baseName = "api"
             isStatic = false
+            linkerOpts.add("-lsqlite3")
         }
     }
 

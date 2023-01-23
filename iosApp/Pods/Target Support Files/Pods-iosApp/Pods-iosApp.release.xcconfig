@@ -1,8 +1,8 @@
 CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO
-FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/../../shared/core/base/build/cocoapods/framework" "${PODS_ROOT}/../../shared/data/datasource/build/cocoapods/framework" "${PODS_ROOT}/../../shared/data/repo/build/cocoapods/framework" "${PODS_ROOT}/../../shared/di/build/cocoapods/framework" "${PODS_ROOT}/../../shared/feature/test/build/cocoapods/framework" "${PODS_ROOT}/../../shared/networking/api/build/cocoapods/framework"
+FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/../../shared/core/navigation/build/cocoapods/framework" "${PODS_ROOT}/../../shared/data/common/build/cocoapods/framework" "${PODS_ROOT}/../../shared/data/database/build/cocoapods/framework" "${PODS_ROOT}/../../shared/data/datasource/build/cocoapods/framework" "${PODS_ROOT}/../../shared/data/repo/build/cocoapods/framework" "${PODS_ROOT}/../../shared/di/build/cocoapods/framework" "${PODS_ROOT}/../../shared/feature/app/build/cocoapods/framework" "${PODS_ROOT}/../../shared/feature/dashboard/build/cocoapods/framework" "${PODS_ROOT}/../../shared/networking/api/build/cocoapods/framework"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
 LD_RUNPATH_SEARCH_PATHS = $(inherited) '@executable_path/Frameworks' '@loader_path/Frameworks'
-OTHER_LDFLAGS = $(inherited) -l"c++" -framework "api" -framework "datasource" -framework "di" -framework "framework" -framework "repo" -framework "test"
+OTHER_LDFLAGS = $(inherited) -l"c++" -framework "api" -framework "app" -framework "common" -framework "dashboard" -framework "database" -framework "datasource" -framework "di" -framework "navigation" -framework "repo"
 PODS_BUILD_DIR = ${BUILD_DIR}
 PODS_CONFIGURATION_BUILD_DIR = ${PODS_BUILD_DIR}/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
 PODS_PODFILE_DIR_PATH = ${SRCROOT}/.

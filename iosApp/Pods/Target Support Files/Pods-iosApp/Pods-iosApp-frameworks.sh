@@ -177,19 +177,25 @@ code_sign_if_enabled() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${PODS_ROOT}/../../shared/networking/api/build/cocoapods/framework/api.framework"
-  install_framework "${PODS_ROOT}/../../shared/core/base/build/cocoapods/framework/framework.framework"
+  install_framework "${PODS_ROOT}/../../shared/feature/app/build/cocoapods/framework/app.framework"
+  install_framework "${PODS_ROOT}/../../shared/data/common/build/cocoapods/framework/common.framework"
+  install_framework "${PODS_ROOT}/../../shared/feature/dashboard/build/cocoapods/framework/dashboard.framework"
+  install_framework "${PODS_ROOT}/../../shared/data/database/build/cocoapods/framework/database.framework"
   install_framework "${PODS_ROOT}/../../shared/data/datasource/build/cocoapods/framework/datasource.framework"
   install_framework "${PODS_ROOT}/../../shared/di/build/cocoapods/framework/di.framework"
+  install_framework "${PODS_ROOT}/../../shared/core/navigation/build/cocoapods/framework/navigation.framework"
   install_framework "${PODS_ROOT}/../../shared/data/repo/build/cocoapods/framework/repo.framework"
-  install_framework "${PODS_ROOT}/../../shared/feature/test/build/cocoapods/framework/test.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${PODS_ROOT}/../../shared/networking/api/build/cocoapods/framework/api.framework"
-  install_framework "${PODS_ROOT}/../../shared/core/base/build/cocoapods/framework/framework.framework"
+  install_framework "${PODS_ROOT}/../../shared/feature/app/build/cocoapods/framework/app.framework"
+  install_framework "${PODS_ROOT}/../../shared/data/common/build/cocoapods/framework/common.framework"
+  install_framework "${PODS_ROOT}/../../shared/feature/dashboard/build/cocoapods/framework/dashboard.framework"
+  install_framework "${PODS_ROOT}/../../shared/data/database/build/cocoapods/framework/database.framework"
   install_framework "${PODS_ROOT}/../../shared/data/datasource/build/cocoapods/framework/datasource.framework"
   install_framework "${PODS_ROOT}/../../shared/di/build/cocoapods/framework/di.framework"
+  install_framework "${PODS_ROOT}/../../shared/core/navigation/build/cocoapods/framework/navigation.framework"
   install_framework "${PODS_ROOT}/../../shared/data/repo/build/cocoapods/framework/repo.framework"
-  install_framework "${PODS_ROOT}/../../shared/feature/test/build/cocoapods/framework/test.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then
   wait
