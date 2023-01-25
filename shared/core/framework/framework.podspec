@@ -5,15 +5,15 @@ Pod::Spec.new do |spec|
     spec.source                   = { :http=> ''}
     spec.authors                  = ''
     spec.license                  = ''
-    spec.summary                  = 'Framework module'
-    spec.vendored_frameworks      = 'build/cocoapods/framework/framework.framework'
+    spec.summary                  = 'Foundation module'
+    spec.vendored_frameworks      = 'build/cocoapods/framework/foundation.framework'
     spec.libraries                = 'c++'
     spec.ios.deployment_target = '14.1'
                 
                 
     spec.pod_target_xcconfig = {
         'KOTLIN_PROJECT_PATH' => ':shared:core:framework',
-        'PRODUCT_MODULE_NAME' => 'framework',
+        'PRODUCT_MODULE_NAME' => 'foundation',
     }
                 
     spec.script_phases = [

@@ -12,7 +12,7 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.speedrun.domain.core.ui.R
+import com.codebox.speedrun.domain.core.ui.R
 
 @Composable
 fun RoundedCornerBox(

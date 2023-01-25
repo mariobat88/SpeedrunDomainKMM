@@ -29,6 +29,7 @@ include(":core:framework")
 include(":core:initializer")
 include(":core:paging")
 include(":core:ui")
+include(":kit:player")
 include(":feature:app")
 include(":feature:dashboard")
 

@@ -3,6 +3,7 @@ package com.codebox.speedrun.domain.feature.dashboard.feature.search
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material3.*
@@ -16,14 +17,17 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
+import androidx.paging.compose.items
 import coil.compose.AsyncImage
 import com.codebox.speedrun.domain.core.ui.RoundedCornerBox
 import com.codebox.speedrun.domain.di.SpeedrunApplicationEntryPoint
 import com.codebox.speedrun.domain.feature.dashboard.feature.search.navigation.SearchNavigator
+import com.codebox.speedrun.domain.kit.player.ui.UserRow
 import com.google.accompanist.placeholder.PlaceholderHighlight
 import com.google.accompanist.placeholder.material.shimmer
 import com.google.accompanist.placeholder.placeholder
@@ -53,8 +57,8 @@ private fun SearchScreen(
     ) {
         val searchedGames =
             viewModel.searchGames.collectAsStateWithLifecycle().value.collectAsLazyPagingItems()
-//        val searchPlayers =
-//            viewModel.searchPlayers.collectAsStateWithLifecycle().value.collectAsLazyPagingItems()
+        val searchPlayers =
+            viewModel.searchPlayers.collectAsStateWithLifecycle().value.collectAsLazyPagingItems()
 
         Column(
             modifier = Modifier.fillMaxSize()
@@ -169,28 +173,28 @@ private fun SearchScreen(
                     }
                 }
             } else {
-//                LazyColumn(
-//                    contentPadding = PaddingValues(
-//                        bottom = sidePadding
-//                    ),
-//                ) {
-//                    items(searchPlayers) { player ->
-//                        key(player!!.id) {
-//                            Box(
-//                                modifier = Modifier
-//                                    .fillMaxWidth()
-//                                    .height(60.dp),
-//                            ) {
-//                                UserRow(player)
-//                                Divider(
-//                                    modifier = Modifier.align(Alignment.BottomCenter),
-//                                    color = Color.DarkGray,
-//                                    thickness = 0.5.dp
-//                                )
-//                            }
-//                        }
-//                    }
-//                }
+                LazyColumn(
+                    contentPadding = PaddingValues(
+                        bottom = sidePadding
+                    ),
+                ) {
+                    items(searchPlayers) { player ->
+                        key(player!!.id) {
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(60.dp),
+                            ) {
+                                UserRow(player)
+                                Divider(
+                                    modifier = Modifier.align(Alignment.BottomCenter),
+                                    color = Color.DarkGray,
+                                    thickness = 0.5.dp
+                                )
+                            }
+                        }
+                    }
+                }
             }
         }
     }

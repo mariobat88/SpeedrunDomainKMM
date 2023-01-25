@@ -5,6 +5,7 @@ import com.codebox.speedrun.domain.data.database.di.DatabaseModule
 import com.codebox.speedrun.domain.data.datasource.di.DatasourceModule
 import com.codebox.speedrun.domain.data.repo.categories.CategoriesRepository
 import com.codebox.speedrun.domain.data.repo.games.GamesRepository
+import com.codebox.speedrun.domain.data.repo.players.PlayersRepository
 import com.codebox.speedrun.domain.networking.di.NetworkingModule
 
 interface AppComponent {
@@ -13,6 +14,7 @@ interface AppComponent {
     val networkingModule: NetworkingModule
     val categoriesRepository: CategoriesRepository
     val gamesRepository: GamesRepository
+    val playersRepository: PlayersRepository
 }
 
 class AppComponentImpl(
@@ -37,5 +39,9 @@ class AppComponentImpl(
 
     override val gamesRepository: GamesRepository by lazy {
         datasourceModule.gamesRepository
+    }
+
+    override val playersRepository: PlayersRepository by lazy {
+        datasourceModule.playerRepository
     }
 }

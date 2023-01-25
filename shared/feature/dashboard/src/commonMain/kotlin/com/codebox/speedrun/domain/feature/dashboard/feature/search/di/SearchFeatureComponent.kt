@@ -25,7 +25,8 @@ class SearchViewModelFactory(
     override fun create(): SearchViewModel {
         return SearchViewModel(
             searchNavigator = searchNavigator,
-            gamesRepository = appComponent.gamesRepository
+            gamesRepository = appComponent.gamesRepository,
+            playersRepository = appComponent.playersRepository
         )
     }
 }

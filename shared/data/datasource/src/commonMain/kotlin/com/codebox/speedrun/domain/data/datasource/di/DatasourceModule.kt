@@ -6,6 +6,8 @@ import com.codebox.speedrun.domain.data.repo.categories.CategoriesRepository
 import com.codebox.speedrun.domain.data.repo.games.GamesRepository
 import com.codebox.speedrun.domain.networking.di.NetworkingModule
 import com.codebox.speedrun.domain.data.datasource.games.GamesRepositoryImpl
+import com.codebox.speedrun.domain.data.datasource.players.PlayersRepositoryImpl
+import com.codebox.speedrun.domain.data.repo.players.PlayersRepository
 
 class DatasourceModule(
     private val networkingModule: NetworkingModule,
@@ -17,5 +19,9 @@ class DatasourceModule(
 
     val gamesRepository: GamesRepository by lazy {
         GamesRepositoryImpl(networkingModule.gamesApiService, databaseModule.database)
+    }
+
+    val playerRepository: PlayersRepository by lazy {
+        PlayersRepositoryImpl(networkingModule.playersApiService, databaseModule.database)
     }
 }

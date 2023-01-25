@@ -9,6 +9,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.cachedIn
 import com.codebox.speedrun.domain.core.framework.SpeedrunViewModel
 import com.codebox.speedrun.domain.data.repo.games.GamesRepository
+import com.codebox.speedrun.domain.data.repo.players.PlayersRepository
 import com.codebox.speedrun.domain.di.AppComponent
 import com.codebox.speedrun.domain.feature.dashboard.feature.search.di.SearchFeatureComponentImpl
 import com.codebox.speedrun.domain.feature.dashboard.feature.search.navigation.SearchNavigator
@@ -18,7 +19,7 @@ import kotlinx.coroutines.flow.*
 actual class SearchViewModel actual constructor(
     private val searchNavigator: SearchNavigator,
     private val gamesRepository: GamesRepository,
-//    private val playersRepository: PlayersRepository,
+    private val playersRepository: PlayersRepository,
 ) : SpeedrunViewModel<ViewState, Intent, Unit>(
     viewState = ViewState()
 ) {
@@ -69,24 +70,24 @@ actual class SearchViewModel actual constructor(
             initialValue = emptyFlow()
         )
 
-//    val searchPlayers = playerSearchFlow
-//        .debounce(500)
-//        .distinctUntilChanged()
-//        .mapLatest { searchTerm ->
-//            Pager(
-//                pagingSourceFactory = {
-//                    SpeedrunPagingSource { offset, max ->
-//                        //playersRepository.searchPlayers(searchTerm, offset, max)
-//                    }
-//                },
-//                config = PagingConfig(pageSize = 20, initialLoadSize = INITIAL_LOAD_SIZE)
-//            ).flow.cachedIn(scope)
-//        }
-//        .stateIn(
-//            scope = scope,
-//            started = SharingStarted.WhileSubscribed(5_000),
-//            initialValue = emptyFlow()
-//        )
+    val searchPlayers = playerSearchFlow
+        .debounce(500)
+        .distinctUntilChanged()
+        .mapLatest { searchTerm ->
+            Pager(
+                pagingSourceFactory = {
+                    SpeedrunPagingSource { offset, max ->
+                        playersRepository.searchPlayers(searchTerm, offset, max)
+                    }
+                },
+                config = PagingConfig(pageSize = 20, initialLoadSize = INITIAL_LOAD_SIZE)
+            ).flow.cachedIn(scope)
+        }
+        .stateIn(
+            scope = scope,
+            started = SharingStarted.WhileSubscribed(5_000),
+            initialValue = emptyFlow()
+        )
 
     override suspend fun bind(intents: Flow<Intent>): Flow<Any> {
         val searchIntent = intents.filterIsInstance<Intent.Search>()
