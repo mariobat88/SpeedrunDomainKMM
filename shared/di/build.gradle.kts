@@ -18,7 +18,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                //implementation(projects.shared.core.fra)
+                implementation(projects.shared.core.wrapper.dispatchers)
                 implementation(projects.shared.data.database)
                 implementation(projects.shared.data.datasource)
                 implementation(projects.shared.data.repo)

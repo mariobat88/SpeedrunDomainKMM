@@ -1,5 +1,6 @@
 @file:Suppress("UnstableApiUsage")
 
+
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 enableFeaturePreview("VERSION_CATALOGS")
 
@@ -36,6 +37,7 @@ include(":feature:dashboard")
 include(":shared")
 include(":shared:core:framework")
 include(":shared:core:navigation")
+include(":shared:core:wrapper:dispatchers")
 include(":shared:feature:app")
 include(":shared:feature:dashboard")
 include(":shared:data:common")

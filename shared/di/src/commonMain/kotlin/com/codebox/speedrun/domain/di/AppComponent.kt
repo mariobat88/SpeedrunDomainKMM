@@ -1,5 +1,6 @@
 package com.codebox.speedrun.domain.di
 
+import com.codebox.speedrun.domain.core.wrapper.dispatchers.DispatchersModule
 import com.codebox.speedrun.domain.data.database.DatabaseDriverFactory
 import com.codebox.speedrun.domain.data.database.di.DatabaseModule
 import com.codebox.speedrun.domain.data.datasource.di.DatasourceModule
@@ -12,6 +13,7 @@ interface AppComponent {
     val databaseModule: DatabaseModule
     val datasourceModule: DatasourceModule
     val networkingModule: NetworkingModule
+    val dispatchersModule: DispatchersModule
     val categoriesRepository: CategoriesRepository
     val gamesRepository: GamesRepository
     val playersRepository: PlayersRepository
@@ -30,7 +32,11 @@ class AppComponentImpl(
     }
 
     override val datasourceModule by lazy {
-        DatasourceModule(networkingModule, databaseModule)
+        DatasourceModule(networkingModule, databaseModule, dispatchersModule)
+    }
+
+    override val dispatchersModule by lazy{
+        DispatchersModule()
     }
 
     override val categoriesRepository: CategoriesRepository by lazy {

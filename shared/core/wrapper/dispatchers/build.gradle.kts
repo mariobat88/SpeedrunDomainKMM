@@ -4,25 +4,19 @@ plugins {
 
 kotlin {
     cocoapods {
-        summary = "Datasource module"
-        homepage = "Link to the Shared Module homepage"
+        summary = "Dispatchers wrapper module"
+        homepage = "Link to the Dispatchers wrapper Module homepage"
         version = "1.0"
         ios.deploymentTarget = "14.1"
         framework {
-            baseName = "datasource"
+            baseName = "dispatchers"
             isStatic = false
-            linkerOpts.add("-lsqlite3")
         }
     }
 
     sourceSets {
-        val commonMain by getting {
-            dependencies {
-                implementation(projects.shared.core.wrapper.dispatchers)
-                implementation(projects.shared.data.common)
-                implementation(projects.shared.data.database)
-                implementation(projects.shared.data.repo)
-                implementation(projects.shared.networking.api)
+        val commonMain by getting{
+            dependencies{
                 implementation(libs.kotlinx.coroutines)
             }
         }

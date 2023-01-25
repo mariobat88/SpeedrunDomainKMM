@@ -30,7 +30,6 @@ class SpeedrunDomainFeatureConventionPlugin : Plugin<Project> {
                 add("implementation", project(":core:framework"))
                 add("implementation", project(":shared:core:navigation"))
                 add("implementation", project(":shared:di"))
-                //add("implementation", project(":core:wrapper:dispatchers"))
             }
         }
     }

@@ -9,7 +9,6 @@ class AppViewModel constructor(
     private val stateNavigator: StateNavigator,
 ) : BaseViewModel(), AppNavigator, StateNavigator by stateNavigator {
 
-
     companion object {
         fun create(): AppViewModel {
             return AppFeatureComponentImpl().appViewModelFactory.create()
