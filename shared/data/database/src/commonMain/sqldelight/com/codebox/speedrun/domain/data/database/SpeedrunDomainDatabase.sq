@@ -1,5 +1,7 @@
-CREATE TABLE CategoryEntity (
-    id              TEXT NOT NULL,
+import com.codebox.speedrun.domain.data.common.enums.RunTimeEnum;
+
+CREATE TABLE CategoryEntity(
+    id              TEXT NOT NULL PRIMARY KEY,
     name            TEXT    NOT NULL,
     weblink         TEXT    NOT NULL,
     type            TEXT    NOT NULL,
@@ -11,3 +13,74 @@ CREATE TABLE CategoryEntity (
 upsertCategory:
 INSERT OR REPLACE INTO CategoryEntity(id, name, weblink, type, rules, miscellaneous, gameId)
 VALUES (?, ?, ?, ?, ?, ?, ?);
+
+CREATE TABLE CategoryPlayerEntity(
+    categoryId  TEXT NOT NULL PRIMARY KEY,
+    type        TEXT NOT NULL,
+    value       INTEGER NOT NULL
+);
+
+upsertCategoryPlayer:
+INSERT OR REPLACE INTO CategoryPlayerEntity(categoryId, type, value)
+VALUES (?, ?, ?);
+
+CREATE TABLE GameEntity(
+    id                  TEXT NOT NULL PRIMARY KEY,
+    boostReceived       INTEGER NOT NULL ,
+    boostDistinctDonors INTEGER NOT NULL,
+    abbreviation        TEXT NOT NULL,
+    weblink             TEXT NOT NULL,
+    discord             TEXT,
+    released            INTEGER NOT NULL,
+    releaseDate         TEXT NOT NULL,
+    romhack             INTEGER AS Boolean DEFAULT 0,
+    created             TEXT
+);
+
+upsertGame:
+INSERT OR REPLACE INTO GameEntity(id, boostReceived, boostDistinctDonors, abbreviation, weblink, discord, released, releaseDate, romhack, created)
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+
+CREATE TABLE GameNamesEntity(
+    gameId          TEXT NOT NULL PRIMARY KEY ,
+    international   TEXT NOT NULL,
+    japanese        TEXT,
+    twitch          TEXT
+);
+
+upsertGameNames:
+INSERT OR REPLACE INTO GameNamesEntity(gameId, international, japanese, twitch)
+VALUES (?, ?, ?, ?);
+
+CREATE TABLE GameRuleSetEntity(
+    gameId              TEXT NOT NULL PRIMARY KEY ,
+    showMilliseconds    INTEGER AS Boolean DEFAULT 0,
+    requireVerification INTEGER AS Boolean DEFAULT 0,
+    requireVideo        INTEGER AS Boolean DEFAULT 0,
+    defaultTime         TEXT AS RunTimeEnum NOT NULL,
+    emulatorsAllowed    INTEGER AS Boolean DEFAULT 0
+);
+
+upsertGameRuleSet:
+INSERT OR REPLACE INTO GameRuleSetEntity(gameId, showMilliseconds, requireVerification, requireVideo, defaultTime, emulatorsAllowed)
+VALUES (?, ?, ?, ?, ?, ?);
+
+CREATE TABLE GameAssetsEntity(
+    gameId      TEXT NOT NULL PRIMARY KEY ,
+    logo        TEXT,
+    coverTiny   TEXT,
+    coverSmall  TEXT,
+    coverMedium TEXT,
+    coverLarge  TEXT,
+    icon        TEXT,
+    trophy1st   TEXT,
+    trophy2nd   TEXT,
+    trophy3rd   TEXT,
+    trophy4th   TEXT,
+    background  TEXT,
+    foreground  TEXT
+);
+
+upsertGameAssets:
+INSERT OR REPLACE INTO GameAssetsEntity(gameId, logo, coverTiny, coverSmall, coverMedium, coverLarge, icon, trophy1st, trophy2nd, trophy3rd, trophy4th, background, foreground)
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);

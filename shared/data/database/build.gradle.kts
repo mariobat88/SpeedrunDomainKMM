@@ -19,6 +19,7 @@ kotlin {
     sourceSets {
         val commonMain by getting{
             dependencies {
+                implementation(projects.shared.data.common)
                 implementation(libs.com.squareup.sqldelight.runtime)
                 implementation(libs.com.squareup.sqldelight.coroutines.extensions)
             }

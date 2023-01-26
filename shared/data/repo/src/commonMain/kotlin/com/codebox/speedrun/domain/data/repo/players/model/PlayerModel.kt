@@ -1,5 +1,6 @@
 package com.codebox.speedrun.domain.data.repo.players.model
 
+import com.codebox.speedrun.domain.data.repo.common.model.NamesModel
 import com.speedrun.domain.repo.common.model.LinkModel
 
 sealed class PlayerModel {

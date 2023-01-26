@@ -2,6 +2,7 @@ package com.codebox.speedrun.domain.data.datasource.games
 
 import com.codebox.speedrun.domain.core.wrapper.dispatchers.DispatcherProvider
 import com.codebox.speedrun.domain.data.database.Database
+import com.codebox.speedrun.domain.data.datasource.games.mapper.toEntity
 import com.codebox.speedrun.domain.data.datasource.games.mapper.toModel
 import com.codebox.speedrun.domain.data.repo.games.GamesRepository
 import com.codebox.speedrun.domain.data.repo.games.model.GameModel
@@ -15,7 +16,7 @@ class GamesRepositoryImpl(
     database: Database,
 ) : GamesRepository {
 
-//    private val gameDao = speedrunDatabase.gameDao()
+    private val gameDao = database.gameDao()
 //    private val runTimeDao = speedrunDatabase.runTimeDao()
 //    private val gameRunTimeDao = speedrunDatabase.gameRunTimeDao()
 //    private val gameDeveloperDao = speedrunDatabase.gameDeveloperDao()
@@ -27,6 +28,16 @@ class GamesRepositoryImpl(
         max: Int
     ): PaginationModel<GameModel> = withContext(dispatcherProvider.io()) {
         val searchedGames = gamesApiService.searchGames(name = name, offset = offset, max = max)
+
+        val gameEntities = searchedGames.data.map { it.toEntity() }
+        val gameNamesEntities = searchedGames.data.map { it.names.toEntity(it.id) }
+        val gameRuleSetEntities = searchedGames.data.map { it.ruleset.toEntity(it.id) }
+        val gameAssetsEntities = searchedGames.data.map { it.assets.toEntity(it.id) }
+
+        gameDao.upsertGames(gameEntities)
+        gameDao.upsertGameNames(gameNamesEntities)
+        gameDao.upsertGameRuleSet(gameRuleSetEntities)
+        gameDao.upsertGameAssets(gameAssetsEntities)
 
         searchedGames.toModel()
     }

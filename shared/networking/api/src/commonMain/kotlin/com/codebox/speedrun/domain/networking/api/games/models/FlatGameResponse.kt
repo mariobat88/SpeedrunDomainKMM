@@ -1,12 +1,13 @@
 package com.codebox.speedrun.domain.networking.api.games.models
 
+import com.codebox.speedrun.domain.networking.api.players.models.NamesResponse
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class FlatGameResponse(
     @SerialName(value = "id") val id: String,
-    @SerialName(value = "names") val names: Names,
+    @SerialName(value = "names") val names: NamesResponse,
     @SerialName(value = "boostReceived") val boostReceived: Int,
     @SerialName(value = "boostDistinctDonors") val boostDistinctDonors: Int,
     @SerialName(value = "abbreviation") val abbreviation: String,

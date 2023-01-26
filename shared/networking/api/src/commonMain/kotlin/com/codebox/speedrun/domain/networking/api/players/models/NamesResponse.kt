@@ -6,5 +6,6 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class NamesResponse(
     @SerialName(value = "international") val international: String,
-    @SerialName(value = "japanese") val japanese: String? = null
+    @SerialName(value = "japanese") val japanese: String?,
+    @SerialName(value = "twitch") val twitch: String?
 )

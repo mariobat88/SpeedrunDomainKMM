@@ -18,7 +18,8 @@ class DatasourceModule(
     val categoriesRepository: CategoriesRepository by lazy {
         CategoriesRepositoryImpl(
             networkingModule.categoriesApiService,
-            dispatchersModule.dispatcherProvider
+            dispatchersModule.dispatcherProvider,
+            databaseModule.database
         )
     }
 
