@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.compose.rememberNavController
+import com.codebox.speedrun.domain.core.navigation.NavigationOptions
 import com.codebox.speedrun.domain.core.ui.SpeedrunScreen
 import com.codebox.speedrun.domain.feature.dashboard.navigation.DashboardNavigator
 import com.codebox.speedrun.domain.feature.dashboard.navigation.DashboardSubNavigation
@@ -59,15 +60,15 @@ fun DashboardScreen(
                                         intentChannel.tryEmit(
                                             Intent.NavigateToTab(
                                                 route = tab.route,
-//                                                navOptions = NavOptions
-//                                                    .Builder()
-//                                                    .setPopUpTo(
-//                                                        route = dashboardNavController.currentDestination?.route,
-//                                                        inclusive = true,
-//                                                        saveState = true
-//                                                    )
-//                                                    .setRestoreState(true)
-//                                                    .build()
+                                                navigationOptions = NavigationOptions
+                                                    .Builder()
+                                                    .setPopUpTo(
+                                                        route = dashboardNavController.currentDestination?.route,
+                                                        inclusive = true,
+                                                        saveState = true
+                                                    )
+                                                    .setRestoreState(true)
+                                                    .build()
                                             )
                                         )
                                     }

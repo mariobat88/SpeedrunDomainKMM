@@ -21,7 +21,11 @@ kotlin {
                 implementation(libs.kotlinx.coroutines)
             }
         }
-        val androidMain by getting
+        val androidMain by getting{
+            dependencies {
+                implementation(libs.androidx.navigation.compose)
+            }
+        }
         val iosX64Main by getting
         val iosArm64Main by getting
         val iosSimulatorArm64Main by getting

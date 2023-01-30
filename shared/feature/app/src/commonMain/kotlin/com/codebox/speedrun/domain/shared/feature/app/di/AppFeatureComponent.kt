@@ -12,7 +12,7 @@ class AppFeatureComponentImpl : AppFeatureComponent {
     override val appViewModelFactory = AppViewModelFactory()
 }
 
-class AppViewModelFactory() : Factory<AppViewModel> {
+class AppViewModelFactory : Factory<AppViewModel> {
     override fun create(): AppViewModel {
         return AppViewModel(
             stateNavigator = StateNavigatorImpl()

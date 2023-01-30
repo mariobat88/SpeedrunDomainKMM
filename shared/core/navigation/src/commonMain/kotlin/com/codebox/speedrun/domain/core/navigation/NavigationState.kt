@@ -13,7 +13,7 @@ sealed class NavigationState {
 
     object Idle : NavigationState()
 
-    data class NavigateToRoute(val route: String, val id: String = Random.nextInt().toString()) :
+    data class NavigateToRoute(val route: String, val navigationOptions: NavigationOptions? = null, val id: String = Random.nextInt().toString()) :
         NavigationState()
 
     /**
