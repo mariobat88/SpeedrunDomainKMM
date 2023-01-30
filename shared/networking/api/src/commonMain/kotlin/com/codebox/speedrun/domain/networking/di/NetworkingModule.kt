@@ -10,6 +10,7 @@ import io.github.aakira.napier.DebugAntilog
 import io.github.aakira.napier.Napier
 import io.ktor.client.*
 import io.ktor.client.plugins.*
+import io.ktor.client.plugins.cache.*
 import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.client.plugins.logging.*
 import io.ktor.http.*
@@ -50,6 +51,7 @@ class NetworkingModule {
                     }
                 )
             }
+            install(HttpCache)
             defaultRequest {
                 url {
                     host = "www.speedrun.com/api/v1"

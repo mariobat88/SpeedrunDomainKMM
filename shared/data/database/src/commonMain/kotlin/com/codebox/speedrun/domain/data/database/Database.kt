@@ -28,4 +28,6 @@ class Database(databaseDriverFactory: DatabaseDriverFactory) {
     fun gameDeveloperDao(): GameDeveloperDao = GameDeveloperDao(database)
 
     fun platformDao(): PlatformDao = PlatformDao(database)
+
+    fun developerDao(): DeveloperDao = DeveloperDao(database)
 }

@@ -125,3 +125,12 @@ CREATE TABLE PlatformEntity(
 upsertPlatform:
 INSERT OR REPLACE INTO PlatformEntity(id, name, released)
 VALUES (?, ?, ?);
+
+CREATE TABLE DeveloperEntity(
+     id         TEXT NOT NULL PRIMARY KEY,
+     name       TEXT NOT NULL
+);
+
+upsertDeveloper:
+INSERT OR REPLACE INTO DeveloperEntity(id, name)
+VALUES (?, ?);
