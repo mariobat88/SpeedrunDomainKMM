@@ -127,10 +127,99 @@ INSERT OR REPLACE INTO PlatformEntity(id, name, released)
 VALUES (?, ?, ?);
 
 CREATE TABLE DeveloperEntity(
-     id         TEXT NOT NULL PRIMARY KEY,
-     name       TEXT NOT NULL
+     id     TEXT NOT NULL PRIMARY KEY,
+     name   TEXT NOT NULL
 );
 
 upsertDeveloper:
 INSERT OR REPLACE INTO DeveloperEntity(id, name)
+VALUES (?, ?);
+
+CREATE TABLE PlayerEntity(
+     id     TEXT NOT NULL PRIMARY KEY,
+     rel    TEXT NOT NULL
+);
+
+upsertPlayer:
+INSERT OR REPLACE INTO PlayerEntity(id, rel)
+VALUES (?, ?);
+
+CREATE TABLE UserEntity(
+     id             TEXT NOT NULL PRIMARY KEY,
+     weblink        TEXT NOT NULL,
+     role           TEXT NOT NULL,
+     signup         TEXT,
+     location       TEXT,
+     twitch         TEXT,
+     hitbox         TEXT,
+     youtube        TEXT,
+     twitter        TEXT,
+     speedrunslive  TEXT,
+     icon           TEXT,
+     supporterIcon  TEXT,
+     image          TEXT,
+     FOREIGN KEY (id) REFERENCES PlayerEntity(id)
+);
+
+upsertUser:
+INSERT OR REPLACE INTO UserEntity(id, weblink, role, signup, location, twitch, hitbox, youtube, twitter, speedrunslive, icon, supporterIcon, image)
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+
+CREATE TABLE UserNamesEntity(
+    userId          TEXT NOT NULL PRIMARY KEY,
+    international   TEXT NOT NULL,
+    japanese        TEXT
+);
+
+upsertUserNames:
+INSERT OR REPLACE INTO UserNamesEntity(userId, international, japanese)
+VALUES (?, ?, ?);
+
+CREATE TABLE UserNamesStyleEntity(
+    userId          TEXT NOT NULL PRIMARY KEY,
+    style           TEXT NOT NULL,
+    colorLight      TEXT,
+    colorDark       TEXT,
+    colorFromLight  TEXT,
+    colorFromDark   TEXT,
+    colorToLight    TEXT,
+    colorToDark     TEXT
+);
+
+upsertUserNameStyles:
+INSERT OR REPLACE INTO UserNamesStyleEntity(userId, style, colorLight, colorDark, colorFromLight, colorFromDark, colorToLight, colorToDark)
+VALUES (?, ?, ?, ?, ?, ?, ?, ?);
+
+CREATE TABLE GuestEntity(
+    id      TEXT NOT NULL PRIMARY KEY,
+    name    TEXT,
+    FOREIGN KEY (id) REFERENCES PlayerEntity(id)
+);
+
+upsertGuests:
+INSERT OR REPLACE INTO GuestEntity(id, name)
+VALUES (?, ?);
+
+CREATE TABLE LocationEntity(
+    id                      TEXT NOT NULL PRIMARY KEY,
+    countryCode             TEXT NOT NULL,
+    countryInternational    TEXT NOT NULL,
+    countryJapanese         TEXT,
+    regionCode              TEXT,
+    regionInternational     TEXT,
+    regionJapanese          TEXT
+);
+
+upsertLocation:
+INSERT OR REPLACE INTO LocationEntity(id, countryCode, countryInternational, countryJapanese, regionCode, regionInternational, regionJapanese)
+VALUES (?, ?, ?, ?, ?, ?, ?);
+
+CREATE TABLE UserLocationEntity(
+    userId      TEXT NOT NULL,
+    locationId  TEXT NOT NULL,
+    PRIMARY KEY (userId, locationId)
+);
+
+upsertUserLocation:
+INSERT OR REPLACE INTO UserLocationEntity(userId, locationId)
 VALUES (?, ?);
