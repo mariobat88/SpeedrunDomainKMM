@@ -58,8 +58,11 @@ CREATE TABLE GameRuleSetEntity(
     requireVerification INTEGER AS Boolean DEFAULT 0,
     requireVideo        INTEGER AS Boolean DEFAULT 0,
     defaultTime         TEXT AS RunTimeEnum NOT NULL,
-    emulatorsAllowed    INTEGER AS Boolean DEFAULT 0
+    emulatorsAllowed    INTEGER AS Boolean DEFAULT 0,
+    FOREIGN KEY (defaultTime) REFERENCES RunTimeEntity (runTime)
 );
+
+CREATE INDEX defaultTimeIndex ON GameRuleSetEntity(defaultTime);
 
 upsertGameRuleSet:
 INSERT OR REPLACE INTO GameRuleSetEntity(gameId, showMilliseconds, requireVerification, requireVideo, defaultTime, emulatorsAllowed)
@@ -84,3 +87,41 @@ CREATE TABLE GameAssetsEntity(
 upsertGameAssets:
 INSERT OR REPLACE INTO GameAssetsEntity(gameId, logo, coverTiny, coverSmall, coverMedium, coverLarge, icon, trophy1st, trophy2nd, trophy3rd, trophy4th, background, foreground)
 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+
+CREATE TABLE RunTimeEntity(
+    runTime TEXT AS RunTimeEnum NOT NULL PRIMARY KEY
+);
+
+upsertRunTime:
+INSERT OR REPLACE INTO RunTimeEntity(runTime)
+VALUES (?);
+
+CREATE TABLE GameRunTimeEntity(
+     gameId     TEXT NOT NULL,
+     runTime    TEXT AS RunTimeEnum NOT NULL,
+     PRIMARY KEY (gameId, runTime)
+);
+
+upsertGameRunTime:
+INSERT OR REPLACE INTO GameRunTimeEntity(gameId, runTime)
+VALUES (?, ?);
+
+CREATE TABLE GameDeveloperEntity(
+     gameId         TEXT NOT NULL,
+     developerId    TEXT NOT NULL,
+     PRIMARY KEY (gameId, developerId)
+);
+
+upsertGameDeveloper:
+INSERT OR REPLACE INTO GameDeveloperEntity(gameId, developerId)
+VALUES (?, ?);
+
+CREATE TABLE PlatformEntity(
+     id         TEXT NOT NULL PRIMARY KEY,
+     name       TEXT NOT NULL,
+     released   INTEGER NOT NULL
+);
+
+upsertPlatform:
+INSERT OR REPLACE INTO PlatformEntity(id, name, released)
+VALUES (?, ?, ?);
