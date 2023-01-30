@@ -3,7 +3,7 @@ package com.codebox.speedrun.domain.feature.app.navigation
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
-import com.codebox.speedrun.domain.core.framework.navigation.StateNavigator
+import com.codebox.speedrun.domain.core.navigation.StateNavigator
 import com.codebox.speedrun.domain.feature.dashboard.navigation.DashboardNavigation
 import com.codebox.speedrun.domain.feature.dashboard.navigation.dashboardNavigation
 import com.codebox.speedrun.domain.shared.feature.app.navigation.AppNavigator

@@ -1,4 +1,4 @@
-package com.codebox.speedrun.domain.core.framework.navigation
+package com.codebox.speedrun.domain.core.navigation
 
 import kotlin.random.Random
 

@@ -16,7 +16,11 @@ kotlin {
     }
 
     sourceSets {
-        val commonMain by getting
+        val commonMain by getting{
+            dependencies{
+                implementation(libs.kotlinx.coroutines)
+            }
+        }
         val androidMain by getting
         val iosX64Main by getting
         val iosArm64Main by getting

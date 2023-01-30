@@ -1,7 +1,7 @@
 package com.codebox.speedrun.domain.feature.dashboard
 
 import com.codebox.speedrun.domain.core.framework.SpeedrunViewModel
-import com.codebox.speedrun.domain.core.framework.navigation.StateNavigator
+import com.codebox.speedrun.domain.core.navigation.StateNavigator
 import com.codebox.speedrun.domain.feature.dashboard.di.DashboardFeatureComponentImpl
 import com.codebox.speedrun.domain.feature.dashboard.navigation.DashboardNavigator
 import com.codebox.speedrun.domain.feature.dashboard.navigation.DashboardSubNavigator

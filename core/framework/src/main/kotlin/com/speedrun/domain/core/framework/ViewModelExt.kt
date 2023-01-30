@@ -7,8 +7,6 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.codebox.speedrun.domain.core.framework.SpeedrunViewModel
-import com.codebox.speedrun.domain.core.framework.navigation.NavigationState
-import com.codebox.speedrun.domain.core.framework.navigation.StateNavigator
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.launch
@@ -49,22 +47,22 @@ fun <ViewState : Any, Intent : Any, SideEffect : Any> Screen(
 @Composable
 fun Navigation(
     navController: NavController,
-    stateNavigator: StateNavigator
+    stateNavigator: com.codebox.speedrun.domain.core.navigation.StateNavigator
 ) {
     when (val navigationState = stateNavigator.navigationState.collectAsState().value) {
-        is NavigationState.NavigateToRoute -> {
+        is com.codebox.speedrun.domain.core.navigation.NavigationState.NavigateToRoute -> {
             //navController.navigate(navigationState.route, navigationState.navOptions)
             navController.navigate(navigationState.route)
             stateNavigator.onNavigated(navigationState)
         }
-        is NavigationState.PopToRoute -> {
+        is com.codebox.speedrun.domain.core.navigation.NavigationState.PopToRoute -> {
             navController.popBackStack(navigationState.staticRoute, false)
             stateNavigator.onNavigated(navigationState)
         }
-        is NavigationState.NavigateUp -> {
+        is com.codebox.speedrun.domain.core.navigation.NavigationState.NavigateUp -> {
             navController.navigateUp()
         }
-        is NavigationState.Idle -> {
+        is com.codebox.speedrun.domain.core.navigation.NavigationState.Idle -> {
         }
     }
 }

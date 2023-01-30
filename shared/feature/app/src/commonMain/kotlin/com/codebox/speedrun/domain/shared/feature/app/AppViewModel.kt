@@ -1,7 +1,7 @@
 package com.codebox.speedrun.domain.shared.feature.app
 
 import com.codebox.speedrun.domain.core.framework.BaseViewModel
-import com.codebox.speedrun.domain.core.framework.navigation.StateNavigator
+import com.codebox.speedrun.domain.core.navigation.StateNavigator
 import com.codebox.speedrun.domain.shared.feature.app.di.AppFeatureComponentImpl
 import com.codebox.speedrun.domain.shared.feature.app.navigation.AppNavigator
 

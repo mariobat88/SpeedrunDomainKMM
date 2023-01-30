@@ -8,4 +8,5 @@ dependencies{
     implementation(libs.androidx.lifecycle.compose.runtime)
     implementation(libs.androidx.navigation.compose)
     api(projects.shared.core.framework)
+    api(projects.shared.core.navigation)
 }
