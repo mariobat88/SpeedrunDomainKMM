@@ -31,7 +31,7 @@ import com.codebox.speedrun.domain.kit.player.ui.UserRow
 import com.google.accompanist.placeholder.PlaceholderHighlight
 import com.google.accompanist.placeholder.material.shimmer
 import com.google.accompanist.placeholder.placeholder
-import com.speedrun.domain.core.framework.Compose
+import com.codebox.speedrun.domain.core.framework.Compose
 import com.codebox.speedrun.domain.core.designsystem.R as DesignSystemResources
 import com.codebox.speedrun.domain.feature.dashboard.R as DashboardResources
 

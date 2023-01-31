@@ -1,12 +1,15 @@
 package com.codebox.speedrun.domain.di
 
+import com.codebox.speedrun.domain.core.wrapper.dispatchers.DispatcherProvider
 import com.codebox.speedrun.domain.core.wrapper.dispatchers.DispatchersModule
 import com.codebox.speedrun.domain.data.database.DatabaseDriverFactory
 import com.codebox.speedrun.domain.data.database.di.DatabaseModule
 import com.codebox.speedrun.domain.data.datasource.di.DatasourceModule
 import com.codebox.speedrun.domain.data.repo.categories.CategoriesRepository
+import com.codebox.speedrun.domain.data.repo.developers.DevelopersRepository
 import com.codebox.speedrun.domain.data.repo.games.GamesRepository
 import com.codebox.speedrun.domain.data.repo.players.PlayersRepository
+import com.codebox.speedrun.domain.data.repo.publishers.PublishersRepository
 import com.codebox.speedrun.domain.networking.di.NetworkingModule
 
 interface AppComponent {
@@ -14,9 +17,12 @@ interface AppComponent {
     val datasourceModule: DatasourceModule
     val networkingModule: NetworkingModule
     val dispatchersModule: DispatchersModule
+    val dispatcherProvider: DispatcherProvider
     val categoriesRepository: CategoriesRepository
     val gamesRepository: GamesRepository
     val playersRepository: PlayersRepository
+    val developersRepository: DevelopersRepository
+    val publishersRepository: PublishersRepository
 }
 
 class AppComponentImpl(
@@ -35,8 +41,12 @@ class AppComponentImpl(
         DatasourceModule(networkingModule, databaseModule, dispatchersModule)
     }
 
-    override val dispatchersModule by lazy{
+    override val dispatchersModule by lazy {
         DispatchersModule()
+    }
+
+    override val dispatcherProvider: DispatcherProvider by lazy {
+        dispatchersModule.dispatcherProvider
     }
 
     override val categoriesRepository: CategoriesRepository by lazy {
@@ -49,5 +59,13 @@ class AppComponentImpl(
 
     override val playersRepository: PlayersRepository by lazy {
         datasourceModule.playerRepository
+    }
+
+    override val developersRepository: DevelopersRepository by lazy {
+        datasourceModule.developersRepository
+    }
+
+    override val publishersRepository: PublishersRepository by lazy {
+        datasourceModule.publishersRepository
     }
 }

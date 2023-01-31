@@ -5,4 +5,5 @@ plugins {
 dependencies{
     api(projects.shared.feature.app)
     implementation(projects.feature.dashboard)
+    implementation(projects.feature.game)
 }

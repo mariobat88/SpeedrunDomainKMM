@@ -30,6 +30,9 @@ class Database(databaseDriverFactory: DatabaseDriverFactory) {
     fun platformDao(): PlatformDao = PlatformDao(database)
 
     fun developerDao(): DeveloperDao = DeveloperDao(database)
+
+    fun publisherDao(): PublisherDao = PublisherDao(database)
+
     fun playerDao(): PlayerDao = PlayerDao(database)
 
     fun locationDao(): LocationDao = LocationDao(database)

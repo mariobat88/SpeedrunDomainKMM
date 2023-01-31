@@ -1,6 +1,7 @@
 package com.codebox.speedrun.domain.feature.dashboard
 
 import com.codebox.speedrun.domain.core.framework.SpeedrunViewModel
+import com.codebox.speedrun.domain.core.navigation.NavigationOptions
 import com.codebox.speedrun.domain.core.navigation.StateNavigator
 import com.codebox.speedrun.domain.feature.dashboard.di.DashboardFeatureComponentImpl
 import com.codebox.speedrun.domain.feature.dashboard.navigation.DashboardNavigator
@@ -26,10 +27,10 @@ class DashboardViewModel(
 
     override suspend fun bind(intents: Flow<Intent>): Flow<Any> {
         return intents.filterIsInstance<Intent.NavigateToTab>()
-            .onEach { intent -> navigateToTab(intent.route) }
+            .onEach { intent -> navigateToTab(intent.route, intent.navigationOptions) }
     }
 
-    override fun navigateToTab(route: String) {
-        stateNavigator.navigateToRoute(route)
+    override fun navigateToTab(route: String, navigationOptions: NavigationOptions) {
+        stateNavigator.navigateToRoute(route, navigationOptions)
     }
 }

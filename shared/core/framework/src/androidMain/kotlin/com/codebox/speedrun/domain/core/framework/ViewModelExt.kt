@@ -1,4 +1,4 @@
-package com.speedrun.domain.core.framework
+package com.codebox.speedrun.domain.core.framework
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.runtime.Composable
@@ -6,7 +6,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
-import com.codebox.speedrun.domain.core.framework.SpeedrunViewModel
 import com.codebox.speedrun.domain.core.navigation.NavigationState
 import com.codebox.speedrun.domain.core.navigation.StateNavigator
 import com.codebox.speedrun.domain.core.navigation.toNavOptions

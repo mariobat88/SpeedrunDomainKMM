@@ -17,7 +17,7 @@ import com.codebox.speedrun.domain.core.navigation.NavigationOptions
 import com.codebox.speedrun.domain.core.ui.SpeedrunScreen
 import com.codebox.speedrun.domain.feature.dashboard.navigation.DashboardNavigator
 import com.codebox.speedrun.domain.feature.dashboard.navigation.DashboardSubNavigation
-import com.speedrun.domain.core.framework.Screen
+import com.codebox.speedrun.domain.core.framework.Screen
 import com.codebox.speedrun.domain.feature.dashboard.R as DashboardResources
 
 @Composable

@@ -12,7 +12,7 @@ import com.codebox.speedrun.domain.feature.dashboard.DashboardViewModel
 import com.codebox.speedrun.domain.feature.dashboard.feature.home.navigation.HomeNavigation
 import com.codebox.speedrun.domain.feature.dashboard.feature.home.navigation.homeNavigation
 import com.codebox.speedrun.domain.feature.dashboard.feature.search.navigation.searchNavigation
-import com.speedrun.domain.core.framework.Navigation
+import com.codebox.speedrun.domain.core.framework.Navigation
 
 fun NavGraphBuilder.dashboardNavigation(
     dashboardNavigator: DashboardNavigator

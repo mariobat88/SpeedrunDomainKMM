@@ -1,6 +1,5 @@
 @file:Suppress("UnstableApiUsage")
 
-
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 enableFeaturePreview("VERSION_CATALOGS")
 
@@ -26,13 +25,13 @@ rootProject.name = "SpeedrunDomain"
 include(":androidApp")
 include(":core:annotations")
 include(":core:designsystem")
-include(":core:framework")
 include(":core:initializer")
 include(":core:paging")
 include(":core:ui")
 include(":kit:player")
 include(":feature:app")
 include(":feature:dashboard")
+include(":feature:game")
 
 include(":shared")
 include(":shared:core:framework")
@@ -40,6 +39,7 @@ include(":shared:core:navigation")
 include(":shared:core:wrapper:dispatchers")
 include(":shared:feature:app")
 include(":shared:feature:dashboard")
+include(":shared:feature:game")
 include(":shared:data:common")
 include(":shared:data:database")
 include(":shared:data:datasource")

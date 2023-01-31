@@ -9,9 +9,7 @@ interface StateNavigator {
     fun onNavigated(state: NavigationState)
     fun navigateUp()
     fun popToRoute(route: String)
-
-    //fun navigateToRoute(route: String, navOptions: NavOptions? = null)
-    fun navigateToRoute(route: String)
+    fun navigateToRoute(route: String, navOptions: NavigationOptions? = null)
 
     val navigationState: StateFlow<NavigationState>
 }
@@ -32,11 +30,8 @@ class StateNavigatorImpl : StateNavigator {
 
     override fun navigateUp() = navigate(NavigationState.NavigateUp())
 
-//    override fun navigateToRoute(route: String, navOptions: NavOptions?) =
-//        navigate(NavigationState.NavigateToRoute(route, navOptions))
-
-    override fun navigateToRoute(route: String) =
-        navigate(NavigationState.NavigateToRoute(route))
+    override fun navigateToRoute(route: String, navOptions: NavigationOptions?) =
+        navigate(NavigationState.NavigateToRoute(route, navOptions))
 
     private fun navigate(state: NavigationState) {
         _navigationState.update { state }

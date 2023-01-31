@@ -4,6 +4,7 @@ import com.codebox.speedrun.domain.core.framework.BaseViewModel
 import com.codebox.speedrun.domain.core.navigation.StateNavigator
 import com.codebox.speedrun.domain.shared.feature.app.di.AppFeatureComponentImpl
 import com.codebox.speedrun.domain.shared.feature.app.navigation.AppNavigator
+import com.codebox.speedrun.domain.shared.feature.game.navigation.GameNavigation
 
 class AppViewModel constructor(
     private val stateNavigator: StateNavigator,
@@ -15,18 +16,18 @@ class AppViewModel constructor(
         }
     }
 
-//    override fun backClicked() {
-//        stateNavigator.navigateUp()
-//    }
-
-    override fun navigateToGameScreen(gameId: String) {
-        //stateNavigator.navigateToRoute(GameNavigation(gameId))
+    override fun backClicked() {
+        stateNavigator.navigateUp()
     }
 
-//    override fun navigateToLeaderboardsScreen(gameId: String) {
-//        stateNavigator.navigateToRoute(LeaderboardsNavigation(gameId))
-//    }
-//
+    override fun navigateToGameScreen(gameId: String) {
+        stateNavigator.navigateToRoute(GameNavigation(gameId))
+    }
+
+    override fun navigateToLeaderboardsScreen(gameId: String) {
+       // stateNavigator.navigateToRoute(LeaderboardsNavigation(gameId))
+    }
+
 //    override fun navigateToRunScreen(runId: String) {
 //        stateNavigator.navigateToRoute(RunNavigation(runId))
 //    }

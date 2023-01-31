@@ -29,6 +29,7 @@ kotlin {
                 implementation(libs.androidx.navigation.compose)
                 implementation(libs.androidx.lifecycle.lifecycle.viewmodel.ktx)
                 implementation(libs.androidx.lifecycle.compose.runtime)
+                implementation(projects.shared.core.navigation)
             }
         }
         val iosX64Main by getting
@@ -43,5 +44,15 @@ kotlin {
                 implementation(libs.org.jetbrains.kotlin.kotlin.stdlib)
             }
         }
+    }
+}
+
+android{
+    buildFeatures {
+        compose = true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = libs.versions.androidxComposeCompiler.get()
     }
 }

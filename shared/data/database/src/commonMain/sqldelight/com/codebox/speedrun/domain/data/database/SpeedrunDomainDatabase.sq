@@ -135,6 +135,15 @@ upsertDeveloper:
 INSERT OR REPLACE INTO DeveloperEntity(id, name)
 VALUES (?, ?);
 
+CREATE TABLE PublisherEntity(
+     id     TEXT NOT NULL PRIMARY KEY,
+     name   TEXT NOT NULL
+);
+
+upsertPublisher:
+INSERT OR REPLACE INTO PublisherEntity(id, name)
+VALUES (?, ?);
+
 CREATE TABLE PlayerEntity(
      id     TEXT NOT NULL PRIMARY KEY,
      rel    TEXT NOT NULL

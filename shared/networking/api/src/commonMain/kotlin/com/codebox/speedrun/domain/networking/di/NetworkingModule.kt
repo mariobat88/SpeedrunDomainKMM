@@ -1,11 +1,13 @@
 package com.codebox.speedrun.domain.networking.di
 
 import com.codebox.speedrun.domain.networking.api.categories.CategoriesApiService
+import com.codebox.speedrun.domain.networking.api.developers.DevelopersApiService
 import com.codebox.speedrun.domain.networking.api.games.GamesApiService
 import com.codebox.speedrun.domain.networking.api.players.PlayersApiService
 import com.codebox.speedrun.domain.networking.api.players.models.GuestResponse
 import com.codebox.speedrun.domain.networking.api.players.models.PlayerResponse
 import com.codebox.speedrun.domain.networking.api.players.models.UserResponse
+import com.codebox.speedrun.domain.networking.api.publishers.PublishersApiService
 import io.github.aakira.napier.DebugAntilog
 import io.github.aakira.napier.Napier
 import io.ktor.client.*
@@ -71,5 +73,13 @@ class NetworkingModule {
 
     val playersApiService by lazy {
         PlayersApiService(httpClient)
+    }
+
+    val developersApiService by lazy {
+        DevelopersApiService(httpClient)
+    }
+
+    val publishersApiService by lazy {
+        PublishersApiService(httpClient)
     }
 }
