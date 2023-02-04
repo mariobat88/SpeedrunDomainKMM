@@ -13,10 +13,6 @@ import com.codebox.speedrun.domain.data.repo.publishers.PublishersRepository
 import com.codebox.speedrun.domain.networking.di.NetworkingModule
 
 interface AppComponent {
-    val databaseModule: DatabaseModule
-    val datasourceModule: DatasourceModule
-    val networkingModule: NetworkingModule
-    val dispatchersModule: DispatchersModule
     val dispatcherProvider: DispatcherProvider
     val categoriesRepository: CategoriesRepository
     val gamesRepository: GamesRepository
@@ -29,19 +25,19 @@ class AppComponentImpl(
     private val databaseDriverFactory: DatabaseDriverFactory
 ) : AppComponent {
 
-    override val networkingModule by lazy {
+    private val networkingModule by lazy {
         NetworkingModule()
     }
 
-    override val databaseModule by lazy {
+    private val databaseModule by lazy {
         DatabaseModule(databaseDriverFactory)
     }
 
-    override val datasourceModule by lazy {
+    private val datasourceModule by lazy {
         DatasourceModule(networkingModule, databaseModule, dispatchersModule)
     }
 
-    override val dispatchersModule by lazy {
+    private val dispatchersModule by lazy {
         DispatchersModule()
     }
 

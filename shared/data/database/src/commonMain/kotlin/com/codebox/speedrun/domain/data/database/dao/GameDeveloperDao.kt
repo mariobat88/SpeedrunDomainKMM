@@ -11,8 +11,8 @@ class GameDeveloperDao(
         dbQuery.transaction {
             gameDevelopers.forEach {
                 dbQuery.upsertGameDeveloper(
-                    gameId = it.gameId,
-                    developerId = it.developerId
+                    gameDeveloper_gameId = it.gameDeveloper_gameId,
+                    gameDeveloper_developerId = it.gameDeveloper_developerId
                 )
             }
         }

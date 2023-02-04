@@ -10,8 +10,8 @@ class DeveloperDao(
     fun upsertDeveloper(developer: DeveloperEntity) {
         dbQuery.transaction {
             dbQuery.upsertDeveloper(
-                id = developer.id,
-                name = developer.name,
+                developer_id = developer.developer_id,
+                developer_name = developer.developer_name,
             )
         }
     }

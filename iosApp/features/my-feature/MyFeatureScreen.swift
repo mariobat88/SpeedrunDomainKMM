@@ -15,7 +15,7 @@ struct MyFeatureScreen : View {
     
     var dashboardViewModel: DashboardViewModel
     
-    init<T: DashboardNavigator>(dashboardNavigator: T){
+    init<T: AppNavigator & DashboardNavigator>(dashboardNavigator: T){
         dashboardViewModel = DashboardViewModel.companion.create(dashboardNavigator: dashboardNavigator)
     }
   

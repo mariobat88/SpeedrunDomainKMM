@@ -6,13 +6,13 @@ import dashboard
 
 @main
 struct iOSApp: App{
-
+    
     let appComponent: AppComponent = AppComponentImpl(databaseDriverFactory: DatabaseDatabaseDriverFactory())
     let appViewModel = AppViewModel.companion.create()
     
-	var body: some Scene {
-		WindowGroup {
+    var body: some Scene {
+        WindowGroup {
             MyFeatureScreen(dashboardNavigator: appViewModel)
-		}
-	}
+        }
+    }
 }

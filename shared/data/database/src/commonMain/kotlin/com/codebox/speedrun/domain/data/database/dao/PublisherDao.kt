@@ -10,8 +10,8 @@ class PublisherDao(
     fun upsertPublisher(publisher: PublisherEntity) {
         dbQuery.transaction {
             dbQuery.upsertPublisher(
-                id = publisher.id,
-                name = publisher.name,
+                publisher_id = publisher.publisher_id,
+                publisher_name = publisher.publisher_name,
             )
         }
     }

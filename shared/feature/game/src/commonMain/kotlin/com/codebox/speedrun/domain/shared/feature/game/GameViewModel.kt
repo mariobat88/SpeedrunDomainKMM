@@ -12,6 +12,8 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.filterIsInstance
 import kotlinx.coroutines.flow.merge
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 
 class GameViewModel(
     private val gameId: String,
@@ -34,6 +36,20 @@ class GameViewModel(
                 gameNavigator = gameNavigator,
                 appComponent = appComponent,
             ).gameViewModelFactory.create()
+        }
+    }
+
+    init {
+        scope.launch(dispatcherProvider.main()) {
+            val getGameByIdFlow = gamesRepository.getGameById(gameId).stateIn(this)
+                .asAsync()
+
+            launch {
+                getGameByIdFlow
+                    .collect { gameAsync ->
+                        reduce { it.copy(gameAsync = gameAsync) }
+                    }
+            }
         }
     }
 

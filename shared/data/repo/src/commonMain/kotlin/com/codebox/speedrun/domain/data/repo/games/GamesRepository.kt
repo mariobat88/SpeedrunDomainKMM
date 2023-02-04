@@ -6,5 +6,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface GamesRepository {
     suspend fun searchGames(name: String, offset: Int, max: Int): PaginationModel<GameModel>
-    //suspend fun getGameById(id: String): Flow<GameModel>
+    suspend fun getGameById(id: String): Flow<GameModel>
 }

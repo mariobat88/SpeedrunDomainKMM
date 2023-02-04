@@ -1,6 +1,17 @@
 package com.codebox.speedrun.domain.data.database.dao
 
-import com.codebox.speedrun.domain.data.database.*
+import com.codebox.speedrun.domain.data.database.GameAssetsEntity
+import com.codebox.speedrun.domain.data.database.GameDeveloperEntity
+import com.codebox.speedrun.domain.data.database.GameEntity
+import com.codebox.speedrun.domain.data.database.GameNamesEntity
+import com.codebox.speedrun.domain.data.database.GamePublisherEntity
+import com.codebox.speedrun.domain.data.database.GameRuleSetEntity
+import com.codebox.speedrun.domain.data.database.RunTimeEntity
+import com.codebox.speedrun.domain.data.database.SpeedrunDomainDatabase
+import com.codebox.speedrun.domain.data.database.result.GameResult
+import com.squareup.sqldelight.runtime.coroutines.asFlow
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
 class GameDao(
     database: SpeedrunDomainDatabase
@@ -11,16 +22,16 @@ class GameDao(
         dbQuery.transaction {
             games.forEach {
                 dbQuery.upsertGame(
-                    id = it.id,
-                    boostReceived = it.boostReceived,
-                    boostDistinctDonors = it.boostDistinctDonors,
-                    abbreviation = it.abbreviation,
-                    weblink = it.weblink,
-                    discord = it.discord,
-                    released = it.released,
-                    releaseDate = it.releaseDate,
-                    romhack = it.romhack,
-                    created = it.created,
+                    game_id = it.game_id,
+                    game_boostReceived = it.game_boostReceived,
+                    game_boostDistinctDonors = it.game_boostDistinctDonors,
+                    game_abbreviation = it.game_abbreviation,
+                    game_weblink = it.game_weblink,
+                    game_discord = it.game_discord,
+                    game_released = it.game_released,
+                    game_releaseDate = it.game_releaseDate,
+                    game_romhack = it.game_romhack,
+                    game_created = it.game_created,
                 )
             }
         }
@@ -30,10 +41,10 @@ class GameDao(
         dbQuery.transaction {
             gameNames.forEach {
                 dbQuery.upsertGameNames(
-                    gameId = it.gameId,
-                    international = it.international,
-                    japanese = it.japanese,
-                    twitch = it.twitch,
+                    gameName_gameId = it.gameName_gameId,
+                    gameName_international = it.gameName_international,
+                    gameName_japanese = it.gameName_japanese,
+                    gameName_twitch = it.gameName_twitch,
                 )
             }
         }
@@ -43,12 +54,12 @@ class GameDao(
         dbQuery.transaction {
             gameRuleSets.forEach {
                 dbQuery.upsertGameRuleSet(
-                    gameId = it.gameId,
-                    showMilliseconds = it.showMilliseconds,
-                    requireVerification = it.requireVerification,
-                    requireVideo = it.requireVideo,
-                    defaultTime = it.defaultTime,
-                    emulatorsAllowed = it.emulatorsAllowed,
+                    gameRuleSet_gameId = it.gameRuleSet_gameId,
+                    gameRuleSet_showMilliseconds = it.gameRuleSet_showMilliseconds,
+                    gameRuleSet_requireVerification = it.gameRuleSet_requireVerification,
+                    gameRuleSet_requireVideo = it.gameRuleSet_requireVideo,
+                    gameRuleSet_defaultTime = it.gameRuleSet_defaultTime,
+                    gameRuleSet_emulatorsAllowed = it.gameRuleSet_emulatorsAllowed,
                 )
             }
         }
@@ -58,21 +69,75 @@ class GameDao(
         dbQuery.transaction {
             gameAssets.forEach {
                 dbQuery.upsertGameAssets(
-                    gameId = it.gameId,
-                    logo = it.logo,
-                    coverTiny = it.coverTiny,
-                    coverSmall = it.coverSmall,
-                    coverMedium = it.coverMedium,
-                    coverLarge = it.coverLarge,
-                    icon = it.icon,
-                    trophy1st = it.trophy1st,
-                    trophy2nd = it.trophy2nd,
-                    trophy3rd = it.trophy3rd,
-                    trophy4th = it.trophy4th,
-                    background = it.background,
-                    foreground = it.foreground,
+                    gameAsset_gameId = it.gameAsset_gameId,
+                    gameAsset_logo = it.gameAsset_logo,
+                    gameAsset_coverTiny = it.gameAsset_coverTiny,
+                    gameAsset_coverSmall = it.gameAsset_coverSmall,
+                    gameAsset_coverMedium = it.gameAsset_coverMedium,
+                    gameAsset_coverLarge = it.gameAsset_coverLarge,
+                    gameAsset_icon = it.gameAsset_icon,
+                    gameAsset_trophy1st = it.gameAsset_trophy1st,
+                    gameAsset_trophy2nd = it.gameAsset_trophy2nd,
+                    gameAsset_trophy3rd = it.gameAsset_trophy3rd,
+                    gameAsset_trophy4th = it.gameAsset_trophy4th,
+                    gameAsset_background = it.gameAsset_background,
+                    gameAsset_foreground = it.gameAsset_foreground,
                 )
             }
+        }
+    }
+
+    fun getGameById(id:String) : Flow<GameResult>{
+        return dbQuery.getGameById(id).asFlow().map {
+            val row = it.executeAsOne()
+            val rows = it.executeAsList()
+
+            GameResult(
+                gameEntity = GameEntity(
+                    game_id = row.game_id,
+                    game_boostReceived = row.game_boostReceived,
+                    game_boostDistinctDonors = row.game_boostDistinctDonors,
+                    game_abbreviation = row.game_abbreviation,
+                    game_weblink = row.game_weblink,
+                    game_discord = row.game_discord,
+                    game_released = row.game_released,
+                    game_releaseDate = row.game_releaseDate,
+                    game_romhack = row.game_romhack,
+                    game_created = row.game_created,
+                ),
+                gameNamesEntity = GameNamesEntity(
+                    gameName_gameId = row.gameName_gameId,
+                    gameName_international = row.gameName_international,
+                    gameName_japanese = row.gameName_japanese,
+                    gameName_twitch = row.gameName_twitch,
+                ),
+                gameRuleSetEntity = GameRuleSetEntity(
+                    gameRuleSet_gameId = row.gameRuleSet_gameId,
+                    gameRuleSet_showMilliseconds = row.gameRuleSet_showMilliseconds,
+                    gameRuleSet_requireVerification = row.gameRuleSet_requireVerification,
+                    gameRuleSet_requireVideo = row.gameRuleSet_requireVideo,
+                    gameRuleSet_defaultTime = row.gameRuleSet_defaultTime,
+                    gameRuleSet_emulatorsAllowed = row.gameRuleSet_emulatorsAllowed,
+                ),
+                gameAssetsEntity = GameAssetsEntity(
+                    gameAsset_gameId = row.gameAsset_gameId,
+                    gameAsset_logo = row.gameAsset_logo,
+                    gameAsset_coverTiny = row.gameAsset_coverTiny,
+                    gameAsset_coverSmall = row.gameAsset_coverSmall,
+                    gameAsset_coverMedium = row.gameAsset_coverMedium,
+                    gameAsset_coverLarge = row.gameAsset_coverLarge,
+                    gameAsset_icon = row.gameAsset_icon,
+                    gameAsset_trophy1st = row.gameAsset_trophy1st,
+                    gameAsset_trophy2nd = row.gameAsset_trophy2nd,
+                    gameAsset_trophy3rd = row.gameAsset_trophy3rd,
+                    gameAsset_trophy4th = row.gameAsset_trophy4th,
+                    gameAsset_background = row.gameAsset_background,
+                    gameAsset_foreground = row.gameAsset_foreground,
+                ),
+                runTimeEntities = rows.groupBy { it.runTime }.map { RunTimeEntity(it.key) },
+                developers = rows.groupBy { it.developer_id }.map { GameDeveloperEntity(row.game_id, it.key) },
+                publishers = rows.groupBy { it.publisher_id}.map { GamePublisherEntity(row.game_id, it.key) },
+            )
         }
     }
 }

@@ -8,6 +8,8 @@ import com.codebox.speedrun.domain.data.repo.games.GamesRepository
 import com.codebox.speedrun.domain.data.repo.games.model.GameModel
 import com.codebox.speedrun.domain.data.repo.pagination.model.PaginationModel
 import com.codebox.speedrun.domain.networking.api.games.GamesApiService
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 
 class GamesRepositoryImpl(
@@ -20,6 +22,7 @@ class GamesRepositoryImpl(
     private val runTimeDao = database.runTimeDao()
     private val gameRunTimeDao = database.gameRunTimeDao()
     private val gameDeveloperDao = database.gameDeveloperDao()
+    private val gamePublisherDao = database.gamePublisherDao()
     private val platformDao = database.platformDao()
 
     override suspend fun searchGames(
@@ -43,6 +46,7 @@ class GamesRepositoryImpl(
         val gameAssetsEntities = searchedGames.data.map { it.assets.toEntity(it.id) }
         val gameRunTimeEntities = searchedGames.data.map { it.toGameRunTimeEntity() }.flatten()
         val gameDeveloperEntities = searchedGames.data.map { it.toGameDeveloperEntity() }.flatten()
+        val gamePublisherEntities = searchedGames.data.map { it.toGamePublisherEntity() }.flatten()
         val platformEntities = searchedGames.data.map { it.platforms.data.map { it.toPlatformEntity() } }.flatten()
 
 
@@ -53,8 +57,14 @@ class GamesRepositoryImpl(
         gameDao.upsertGameAssets(gameAssetsEntities)
         gameRunTimeDao.upsertGameRunTimes(gameRunTimeEntities)
         gameDeveloperDao.upsertGameDevelopers(gameDeveloperEntities)
+        gamePublisherDao.upsertGamePublishers(gamePublisherEntities)
         platformDao.upsertPlatforms(platformEntities)
 
         searchedGames.toModel()
     }
+
+    override suspend fun getGameById(id: String): Flow<GameModel> =
+        withContext(dispatcherProvider.io()) {
+            gameDao.getGameById(id).map { it.toGameModel() }
+        }
 }

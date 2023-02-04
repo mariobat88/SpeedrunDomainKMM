@@ -5,12 +5,12 @@ import com.codebox.speedrun.domain.data.repo.developers.model.DeveloperModel
 import com.codebox.speedrun.domain.networking.api.developers.models.DeveloperResponse
 
 fun DeveloperResponse.Data.toDeveloperEntity() = DeveloperEntity(
-    id = id,
-    name = name,
+    developer_id = id,
+    developer_name = name,
 )
 
 fun DeveloperEntity.toDeveloperModel() = DeveloperModel(
-    id = id,
-    name = name,
+    id = developer_id,
+    name = developer_name,
     links = emptyList()
 )

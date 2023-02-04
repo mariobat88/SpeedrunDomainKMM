@@ -25,67 +25,80 @@ INSERT OR REPLACE INTO CategoryPlayerEntity(categoryId, type, value)
 VALUES (?, ?, ?);
 
 CREATE TABLE GameEntity(
-    id                  TEXT NOT NULL PRIMARY KEY,
-    boostReceived       INTEGER NOT NULL ,
-    boostDistinctDonors INTEGER NOT NULL,
-    abbreviation        TEXT NOT NULL,
-    weblink             TEXT NOT NULL,
-    discord             TEXT,
-    released            INTEGER NOT NULL,
-    releaseDate         TEXT NOT NULL,
-    romhack             INTEGER AS Boolean DEFAULT 0,
-    created             TEXT
+    game_id                  TEXT NOT NULL PRIMARY KEY,
+    game_boostReceived       INTEGER NOT NULL ,
+    game_boostDistinctDonors INTEGER NOT NULL,
+    game_abbreviation        TEXT NOT NULL,
+    game_weblink             TEXT NOT NULL,
+    game_discord             TEXT,
+    game_released            INTEGER NOT NULL,
+    game_releaseDate         TEXT NOT NULL,
+    game_romhack             INTEGER AS Boolean DEFAULT 0 NOT NULL,
+    game_created             TEXT
 );
 
 upsertGame:
-INSERT OR REPLACE INTO GameEntity(id, boostReceived, boostDistinctDonors, abbreviation, weblink, discord, released, releaseDate, romhack, created)
+INSERT OR REPLACE INTO GameEntity(game_id, game_boostReceived, game_boostDistinctDonors, game_abbreviation, game_weblink, game_discord, game_released, game_releaseDate, game_romhack, game_created)
 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
 
+getGameById:
+SELECT * FROM GameEntity
+INNER JOIN GameRunTimeEntity ON GameRunTimeEntity.gameId = GameEntity.game_id
+INNER JOIN RunTimeEntity ON RunTimeEntity.runTime = GameRunTimeEntity.runTime
+INNER JOIN GameNamesEntity ON GameNamesEntity.gameName_gameId = GameEntity.game_id
+INNER JOIN GameRuleSetEntity ON GameRuleSetEntity.gameRuleSet_gameId = GameEntity.game_id
+INNER JOIN GameDeveloperEntity ON GameDeveloperEntity.gameDeveloper_gameId = GameEntity.game_id
+INNER JOIN GamePublisherEntity ON GameDeveloperEntity.gameDeveloper_gameId = GameEntity.game_id
+INNER JOIN GameAssetsEntity ON GameAssetsEntity.gameAsset_gameId = GameEntity.game_id
+INNER JOIN DeveloperEntity ON DeveloperEntity.developer_id = GameDeveloperEntity.gameDeveloper_developerId
+INNER JOIN PublisherEntity ON PublisherEntity.publisher_id = GamePublisherEntity.gamePublisher_publisherId
+WHERE GameEntity.game_id = ?;
+
 CREATE TABLE GameNamesEntity(
-    gameId          TEXT NOT NULL PRIMARY KEY ,
-    international   TEXT NOT NULL,
-    japanese        TEXT,
-    twitch          TEXT
+    gameName_gameId          TEXT NOT NULL PRIMARY KEY ,
+    gameName_international   TEXT NOT NULL,
+    gameName_japanese        TEXT,
+    gameName_twitch          TEXT
 );
 
 upsertGameNames:
-INSERT OR REPLACE INTO GameNamesEntity(gameId, international, japanese, twitch)
+INSERT OR REPLACE INTO GameNamesEntity(gameName_gameId, gameName_international, gameName_japanese, gameName_twitch)
 VALUES (?, ?, ?, ?);
 
 CREATE TABLE GameRuleSetEntity(
-    gameId              TEXT NOT NULL PRIMARY KEY ,
-    showMilliseconds    INTEGER AS Boolean DEFAULT 0,
-    requireVerification INTEGER AS Boolean DEFAULT 0,
-    requireVideo        INTEGER AS Boolean DEFAULT 0,
-    defaultTime         TEXT AS RunTimeEnum NOT NULL,
-    emulatorsAllowed    INTEGER AS Boolean DEFAULT 0,
-    FOREIGN KEY (defaultTime) REFERENCES RunTimeEntity (runTime)
+    gameRuleSet_gameId              TEXT NOT NULL PRIMARY KEY ,
+    gameRuleSet_showMilliseconds    INTEGER AS Boolean DEFAULT 0 NOT NULL,
+    gameRuleSet_requireVerification INTEGER AS Boolean DEFAULT 0 NOT NULL,
+    gameRuleSet_requireVideo        INTEGER AS Boolean DEFAULT 0 NOT NULL,
+    gameRuleSet_defaultTime         TEXT AS RunTimeEnum NOT NULL,
+    gameRuleSet_emulatorsAllowed    INTEGER AS Boolean DEFAULT 0 NOT NULL,
+    FOREIGN KEY (gameRuleSet_defaultTime) REFERENCES RunTimeEntity (runTime)
 );
 
-CREATE INDEX defaultTimeIndex ON GameRuleSetEntity(defaultTime);
+CREATE INDEX defaultTimeIndex ON GameRuleSetEntity(gameRuleSet_defaultTime);
 
 upsertGameRuleSet:
-INSERT OR REPLACE INTO GameRuleSetEntity(gameId, showMilliseconds, requireVerification, requireVideo, defaultTime, emulatorsAllowed)
+INSERT OR REPLACE INTO GameRuleSetEntity(gameRuleSet_gameId, gameRuleSet_showMilliseconds, gameRuleSet_requireVerification, gameRuleSet_requireVideo, gameRuleSet_defaultTime, gameRuleSet_emulatorsAllowed)
 VALUES (?, ?, ?, ?, ?, ?);
 
 CREATE TABLE GameAssetsEntity(
-    gameId      TEXT NOT NULL PRIMARY KEY ,
-    logo        TEXT,
-    coverTiny   TEXT,
-    coverSmall  TEXT,
-    coverMedium TEXT,
-    coverLarge  TEXT,
-    icon        TEXT,
-    trophy1st   TEXT,
-    trophy2nd   TEXT,
-    trophy3rd   TEXT,
-    trophy4th   TEXT,
-    background  TEXT,
-    foreground  TEXT
+    gameAsset_gameId      TEXT NOT NULL PRIMARY KEY ,
+    gameAsset_logo        TEXT,
+    gameAsset_coverTiny   TEXT,
+    gameAsset_coverSmall  TEXT,
+    gameAsset_coverMedium TEXT,
+    gameAsset_coverLarge  TEXT,
+    gameAsset_icon        TEXT,
+    gameAsset_trophy1st   TEXT,
+    gameAsset_trophy2nd   TEXT,
+    gameAsset_trophy3rd   TEXT,
+    gameAsset_trophy4th   TEXT,
+    gameAsset_background  TEXT,
+    gameAsset_foreground  TEXT
 );
 
 upsertGameAssets:
-INSERT OR REPLACE INTO GameAssetsEntity(gameId, logo, coverTiny, coverSmall, coverMedium, coverLarge, icon, trophy1st, trophy2nd, trophy3rd, trophy4th, background, foreground)
+INSERT OR REPLACE INTO GameAssetsEntity(gameAsset_gameId, gameAsset_logo, gameAsset_coverTiny, gameAsset_coverSmall, gameAsset_coverMedium, gameAsset_coverLarge, gameAsset_icon, gameAsset_trophy1st, gameAsset_trophy2nd, gameAsset_trophy3rd, gameAsset_trophy4th, gameAsset_background, gameAsset_foreground)
 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
 
 CREATE TABLE RunTimeEntity(
@@ -107,41 +120,51 @@ INSERT OR REPLACE INTO GameRunTimeEntity(gameId, runTime)
 VALUES (?, ?);
 
 CREATE TABLE GameDeveloperEntity(
-     gameId         TEXT NOT NULL,
-     developerId    TEXT NOT NULL,
-     PRIMARY KEY (gameId, developerId)
+     gameDeveloper_gameId         TEXT NOT NULL,
+     gameDeveloper_developerId    TEXT NOT NULL,
+     PRIMARY KEY (gameDeveloper_gameId, gameDeveloper_developerId)
 );
 
 upsertGameDeveloper:
-INSERT OR REPLACE INTO GameDeveloperEntity(gameId, developerId)
+INSERT OR REPLACE INTO GameDeveloperEntity(gameDeveloper_gameId, gameDeveloper_developerId)
+VALUES (?, ?);
+
+CREATE TABLE GamePublisherEntity(
+     gamePublisher_gameId         TEXT NOT NULL,
+     gamePublisher_publisherId    TEXT NOT NULL,
+     PRIMARY KEY (gamePublisher_gameId, gamePublisher_publisherId)
+);
+
+upsertGamePublisher:
+INSERT OR REPLACE INTO GamePublisherEntity(gamePublisher_gameId, gamePublisher_publisherId)
 VALUES (?, ?);
 
 CREATE TABLE PlatformEntity(
-     id         TEXT NOT NULL PRIMARY KEY,
-     name       TEXT NOT NULL,
-     released   INTEGER NOT NULL
+     platform_id         TEXT NOT NULL PRIMARY KEY,
+     platform_name       TEXT NOT NULL,
+     platform_released   INTEGER NOT NULL
 );
 
 upsertPlatform:
-INSERT OR REPLACE INTO PlatformEntity(id, name, released)
+INSERT OR REPLACE INTO PlatformEntity(platform_id, platform_name, platform_released)
 VALUES (?, ?, ?);
 
 CREATE TABLE DeveloperEntity(
-     id     TEXT NOT NULL PRIMARY KEY,
-     name   TEXT NOT NULL
+     developer_id     TEXT NOT NULL PRIMARY KEY,
+     developer_name   TEXT NOT NULL
 );
 
 upsertDeveloper:
-INSERT OR REPLACE INTO DeveloperEntity(id, name)
+INSERT OR REPLACE INTO DeveloperEntity(developer_id, developer_name)
 VALUES (?, ?);
 
 CREATE TABLE PublisherEntity(
-     id     TEXT NOT NULL PRIMARY KEY,
-     name   TEXT NOT NULL
+     publisher_id     TEXT NOT NULL PRIMARY KEY,
+     publisher_name   TEXT NOT NULL
 );
 
 upsertPublisher:
-INSERT OR REPLACE INTO PublisherEntity(id, name)
+INSERT OR REPLACE INTO PublisherEntity(publisher_id, publisher_name)
 VALUES (?, ?);
 
 CREATE TABLE PlayerEntity(

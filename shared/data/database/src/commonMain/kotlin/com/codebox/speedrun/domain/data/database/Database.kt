@@ -7,7 +7,7 @@ class Database(databaseDriverFactory: DatabaseDriverFactory) {
     private val database = SpeedrunDomainDatabase(
         driver = databaseDriverFactory.createDriver(),
         GameRuleSetEntityAdapter = GameRuleSetEntity.Adapter(
-            defaultTimeAdapter = EnumColumnAdapter()
+            gameRuleSet_defaultTimeAdapter = EnumColumnAdapter()
         ),
         GameRunTimeEntityAdapter = GameRunTimeEntity.Adapter(
             runTimeAdapter = EnumColumnAdapter()
@@ -26,6 +26,8 @@ class Database(databaseDriverFactory: DatabaseDriverFactory) {
     fun gameRunTimeDao(): GameRunTimeDao = GameRunTimeDao(database)
 
     fun gameDeveloperDao(): GameDeveloperDao = GameDeveloperDao(database)
+
+    fun gamePublisherDao(): GamePublisherDao = GamePublisherDao(database)
 
     fun platformDao(): PlatformDao = PlatformDao(database)
 

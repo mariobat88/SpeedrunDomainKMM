@@ -11,9 +11,9 @@ class PlatformDao(
         dbQuery.transaction {
             platforms.forEach {
                 dbQuery.upsertPlatform(
-                    id = it.id,
-                    name = it.name,
-                    released = it.released,
+                    platform_id = it.platform_id,
+                    platform_name = it.platform_name,
+                    platform_released = it.platform_released,
                 )
             }
         }

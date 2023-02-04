@@ -5,12 +5,12 @@ import com.codebox.speedrun.domain.data.repo.publishers.model.PublisherModel
 import com.codebox.speedrun.domain.networking.api.publishers.models.PublisherResponse
 
 fun PublisherResponse.Data.toPublisherEntity() = PublisherEntity(
-    id = id,
-    name = name,
+    publisher_id = id,
+    publisher_name = name,
 )
 
 fun PublisherEntity.toPublisherModel() = PublisherModel(
-    id = id,
-    name = name,
+    id = publisher_id,
+    name = publisher_name,
     links = emptyList()
 )

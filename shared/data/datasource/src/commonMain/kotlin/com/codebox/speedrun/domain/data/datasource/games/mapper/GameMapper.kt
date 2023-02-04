@@ -1,17 +1,20 @@
 package com.codebox.speedrun.domain.data.datasource.games.mapper
 
+import com.codebox.speedrun.domain.data.common.enums.RunTimeEnum
 import com.codebox.speedrun.domain.data.database.GameAssetsEntity
 import com.codebox.speedrun.domain.data.database.GameEntity
 import com.codebox.speedrun.domain.data.database.GameNamesEntity
 import com.codebox.speedrun.domain.data.database.GameRuleSetEntity
+import com.codebox.speedrun.domain.data.database.result.GameResult
+import com.codebox.speedrun.domain.data.datasource.common.mapper.toModel
+import com.codebox.speedrun.domain.data.datasource.pagination.mapper.toModel
+import com.codebox.speedrun.domain.data.repo.common.model.NamesModel
 import com.codebox.speedrun.domain.data.repo.games.model.GameModel
 import com.codebox.speedrun.domain.data.repo.pagination.model.PaginationModel
-import com.codebox.speedrun.domain.networking.api.games.models.GameResponse
-import com.codebox.speedrun.domain.networking.api.pagination.models.PaginationResponse
-import com.codebox.speedrun.domain.data.datasource.pagination.mapper.toModel
-import com.codebox.speedrun.domain.data.datasource.common.mapper.toModel
 import com.codebox.speedrun.domain.networking.api.games.models.Assets
+import com.codebox.speedrun.domain.networking.api.games.models.GameResponse
 import com.codebox.speedrun.domain.networking.api.games.models.Ruleset
+import com.codebox.speedrun.domain.networking.api.pagination.models.PaginationResponse
 import com.codebox.speedrun.domain.networking.api.players.models.NamesResponse
 
 fun PaginationResponse<GameResponse>.toModel() = PaginationModel(
@@ -45,46 +48,102 @@ fun GameResponse.toModel() = GameModel(
 )
 
 fun GameResponse.toEntity() = GameEntity(
-    id = id,
-    boostReceived = boostReceived.toLong(),
-    boostDistinctDonors = boostDistinctDonors.toLong(),
-    abbreviation = abbreviation,
-    weblink = weblink,
-    discord = discord,
-    released = released.toLong(),
-    releaseDate = releaseDate,
-    romhack = romhack,
-    created = created,
+    game_id = id,
+    game_boostReceived = boostReceived.toLong(),
+    game_boostDistinctDonors = boostDistinctDonors.toLong(),
+    game_abbreviation = abbreviation,
+    game_weblink = weblink,
+    game_discord = discord,
+    game_released = released.toLong(),
+    game_releaseDate = releaseDate,
+    game_romhack = romhack,
+    game_created = created,
 )
 
 fun NamesResponse.toEntity(gameId: String) = GameNamesEntity(
-    gameId = gameId,
-    international = international,
-    japanese = japanese,
-    twitch = twitch,
+    gameName_gameId = gameId,
+    gameName_international = international,
+    gameName_japanese = japanese,
+    gameName_twitch = twitch,
 )
 
 fun Ruleset.toEntity(gameId: String) = GameRuleSetEntity(
-    gameId = gameId,
-    showMilliseconds = showMilliseconds,
-    requireVerification = requireVerification,
-    requireVideo = requireVideo,
-    defaultTime = defaultTime,
-    emulatorsAllowed = emulatorsAllowed,
+    gameRuleSet_gameId = gameId,
+    gameRuleSet_showMilliseconds = showMilliseconds,
+    gameRuleSet_requireVerification = requireVerification,
+    gameRuleSet_requireVideo = requireVideo,
+    gameRuleSet_defaultTime = defaultTime,
+    gameRuleSet_emulatorsAllowed = emulatorsAllowed,
 )
 
 fun Assets.toEntity(gameId: String) = GameAssetsEntity(
-    gameId = gameId,
-    logo = logo.uri,
-    coverTiny = coverTiny.uri,
-    coverSmall = coverSmall.uri,
-    coverMedium = coverMedium.uri,
-    coverLarge = coverLarge.uri,
-    icon = icon.uri,
-    trophy1st = trophy1st.uri,
-    trophy2nd = trophy2nd.uri,
-    trophy3rd = trophy3rd.uri,
-    trophy4th = trophy4th.uri,
-    background = background.uri,
-    foreground = foreground.uri,
+    gameAsset_gameId = gameId,
+    gameAsset_logo = logo.uri,
+    gameAsset_coverTiny = coverTiny.uri,
+    gameAsset_coverSmall = coverSmall.uri,
+    gameAsset_coverMedium = coverMedium.uri,
+    gameAsset_coverLarge = coverLarge.uri,
+    gameAsset_icon = icon.uri,
+    gameAsset_trophy1st = trophy1st.uri,
+    gameAsset_trophy2nd = trophy2nd.uri,
+    gameAsset_trophy3rd = trophy3rd.uri,
+    gameAsset_trophy4th = trophy4th.uri,
+    gameAsset_background = background.uri,
+    gameAsset_foreground = foreground.uri,
+)
+
+fun GameResult.toGameModel(): GameModel {
+    return GameModel(
+        id = gameEntity.game_id,
+        names = gameNamesEntity.toModel(),
+        boostReceived = gameEntity.game_boostReceived.toInt(),
+        boostDistinctDonors = gameEntity.game_boostDistinctDonors.toInt(),
+        abbreviation = gameEntity.game_abbreviation,
+        weblink = gameEntity.game_weblink,
+        discord = gameEntity.game_discord,
+        released = gameEntity.game_released.toInt(),
+        releaseDate = gameEntity.game_releaseDate,
+        ruleset = gameRuleSetEntity.toModel(runTimeEntities.map { it.toRunTimeEnum() }),
+        romhack = gameEntity.game_romhack,
+        gametypes = emptyList(),
+        platforms = emptyList(),
+        regions = emptyList(),
+        genres = emptyList(),
+        engines = emptyList(),
+        developers = developers.map { it.gameDeveloper_developerId },
+        publishers = publishers.map { it.gamePublisher_publisherId },
+        moderators = emptyMap(),
+        created = gameEntity.game_created,
+        assets = gameAssetsEntity.toModel(),
+    )
+}
+
+private fun GameNamesEntity.toModel() = NamesModel(
+    international = gameName_international,
+    japanese = gameName_international,
+    twitch = gameName_twitch,
+)
+
+private fun GameRuleSetEntity.toModel(runTimes: List<RunTimeEnum>? = null) = GameModel.Ruleset(
+    showMilliseconds = gameRuleSet_showMilliseconds,
+    requireVerification = gameRuleSet_requireVerification,
+    requireVideo = gameRuleSet_requireVideo,
+    runTimes = runTimes,
+    defaultTime = gameRuleSet_defaultTime,
+    emulatorsAllowed = gameRuleSet_emulatorsAllowed,
+)
+
+private fun GameAssetsEntity.toModel() = GameModel.Assets(
+    logo = gameAsset_logo,
+    coverTiny = gameAsset_coverTiny,
+    coverSmall = gameAsset_coverSmall,
+    coverMedium = gameAsset_coverMedium,
+    coverLarge = gameAsset_coverLarge,
+    icon = gameAsset_icon,
+    trophy1st = gameAsset_trophy1st,
+    trophy2nd = gameAsset_trophy2nd,
+    trophy3rd = gameAsset_trophy3rd,
+    trophy4th = gameAsset_trophy4th,
+    background = gameAsset_background,
+    foreground = gameAsset_foreground,
 )
