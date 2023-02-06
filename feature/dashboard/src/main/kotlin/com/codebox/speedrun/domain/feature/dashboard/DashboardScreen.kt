@@ -13,18 +13,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.compose.rememberNavController
+import com.codebox.speedrun.domain.core.framework.Screen
+import com.codebox.speedrun.domain.core.framework.speedrunViewModel
 import com.codebox.speedrun.domain.core.navigation.NavigationOptions
 import com.codebox.speedrun.domain.core.ui.SpeedrunScreen
 import com.codebox.speedrun.domain.feature.dashboard.navigation.DashboardNavigator
 import com.codebox.speedrun.domain.feature.dashboard.navigation.DashboardSubNavigation
-import com.codebox.speedrun.domain.core.framework.Screen
 import com.codebox.speedrun.domain.feature.dashboard.R as DashboardResources
 
 @Composable
 fun DashboardScreen(
     dashboardNavigator: DashboardNavigator
 ) {
-    val dashboardViewModel = DashboardViewModel.create(dashboardNavigator)
+    val dashboardViewModel = speedrunViewModel { DashboardViewModel.create(dashboardNavigator) }
     DashboardScreen(dashboardViewModel)
 }
 

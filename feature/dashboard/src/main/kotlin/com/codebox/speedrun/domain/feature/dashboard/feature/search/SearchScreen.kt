@@ -2,11 +2,26 @@ package com.codebox.speedrun.domain.feature.dashboard.feature.search
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.material3.*
+import androidx.compose.material3.Divider
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Tab
+import androidx.compose.material3.TabRow
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.key
 import androidx.compose.ui.Alignment
@@ -24,6 +39,8 @@ import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.items
 import coil.compose.AsyncImage
+import com.codebox.speedrun.domain.core.framework.Compose
+import com.codebox.speedrun.domain.core.framework.speedrunViewModel
 import com.codebox.speedrun.domain.core.ui.RoundedCornerBox
 import com.codebox.speedrun.domain.di.SpeedrunApplicationEntryPoint
 import com.codebox.speedrun.domain.feature.dashboard.feature.search.navigation.SearchNavigator
@@ -31,7 +48,6 @@ import com.codebox.speedrun.domain.kit.player.ui.UserRow
 import com.google.accompanist.placeholder.PlaceholderHighlight
 import com.google.accompanist.placeholder.material.shimmer
 import com.google.accompanist.placeholder.placeholder
-import com.codebox.speedrun.domain.core.framework.Compose
 import com.codebox.speedrun.domain.core.designsystem.R as DesignSystemResources
 import com.codebox.speedrun.domain.feature.dashboard.R as DashboardResources
 
@@ -40,7 +56,7 @@ fun SearchScreen(
     searchNavigator: SearchNavigator,
 ) {
     val appComponent = (LocalContext.current.applicationContext as SpeedrunApplicationEntryPoint).appComponent
-    val searchViewModel = SearchViewModel.create(appComponent, searchNavigator)
+    val searchViewModel = speedrunViewModel { SearchViewModel.create(appComponent, searchNavigator) }
     SearchScreen(searchViewModel)
 }
 

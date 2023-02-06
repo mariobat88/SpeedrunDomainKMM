@@ -18,11 +18,11 @@ kotlin {
     sourceSets {
         val commonMain by getting{
             dependencies{
+                api(projects.shared.core.framework)
+                api(projects.shared.data.repo)
                 implementation(libs.kotlinx.coroutines)
-                implementation(projects.shared.core.framework)
                 implementation(projects.shared.core.navigation)
                 implementation(projects.shared.core.wrapper.dispatchers)
-                implementation(projects.shared.data.repo)
                 implementation(projects.shared.di)
             }
         }

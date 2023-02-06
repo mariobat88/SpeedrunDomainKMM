@@ -4,4 +4,6 @@ plugins {
 
 dependencies{
     api(projects.shared.feature.game)
+    implementation(projects.shared.data.common)
+    implementation(libs.coil)
 }

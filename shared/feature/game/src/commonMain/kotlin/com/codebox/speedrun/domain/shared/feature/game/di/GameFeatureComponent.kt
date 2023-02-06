@@ -10,18 +10,18 @@ interface GameFeatureComponent {
 }
 
 class GameFeatureComponentImpl(
+    appComponent: AppComponent,
     gameId: String,
     gameNavigator: GameNavigator,
-    appComponent: AppComponent,
 ) : GameFeatureComponent {
 
-    override val gameViewModelFactory = GameViewModelFactory(gameId, gameNavigator, appComponent)
+    override val gameViewModelFactory = GameViewModelFactory(appComponent, gameId, gameNavigator)
 }
 
 class GameViewModelFactory(
+    private val appComponent: AppComponent,
     private val gameId: String,
     private val gameNavigator: GameNavigator,
-    private val appComponent: AppComponent,
 ) : Factory<GameViewModel> {
     override fun create(): GameViewModel {
         return GameViewModel(
