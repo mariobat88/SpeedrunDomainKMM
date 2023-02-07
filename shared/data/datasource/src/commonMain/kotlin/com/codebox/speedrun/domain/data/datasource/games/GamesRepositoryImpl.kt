@@ -49,7 +49,6 @@ class GamesRepositoryImpl(
         val gamePublisherEntities = searchedGames.data.map { it.toGamePublisherEntity() }.flatten()
         val platformEntities = searchedGames.data.map { it.platforms.data.map { it.toPlatformEntity() } }.flatten()
 
-
         runTimeDao.upsertRunTimes(runTimeEntities)
         gameDao.upsertGames(gameEntities)
         gameDao.upsertGameNames(gameNamesEntities)

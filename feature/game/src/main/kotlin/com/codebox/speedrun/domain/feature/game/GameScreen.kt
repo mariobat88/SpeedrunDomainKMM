@@ -365,7 +365,7 @@ private fun GameInfo(
         AnimatedVisibility(visible = viewState.publishersAsync() != null && viewState.publishersAsync()!!.isNotEmpty()) {
             Text(
                 text = stringResource(
-                    GameScreenResources.string.developed_by,
+                    GameScreenResources.string.published_by,
                     viewState.publishers
                 ),
                 color = MaterialTheme.colorScheme.onBackground,

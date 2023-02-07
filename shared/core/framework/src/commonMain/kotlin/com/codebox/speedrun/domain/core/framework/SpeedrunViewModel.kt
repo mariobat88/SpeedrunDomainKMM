@@ -58,6 +58,7 @@ abstract class SpeedrunViewModel<VS, I, E>(
                 reducer(Success(result))
                 result
             }.onFailure { ex ->
+                ex.printStackTrace()
                 Fail<T>(error = ex)
             }
         }
@@ -69,6 +70,7 @@ abstract class SpeedrunViewModel<VS, I, E>(
         return this.map<T, Async<T>> { Success(it) }
             .onStart { emit(Loading(value = retainValue?.get(viewState.value)?.invoke())) }
             .catch { ex ->
+                ex.printStackTrace()
                 emit(Fail(error = ex))
             }
     }

@@ -135,8 +135,8 @@ class GameDao(
                     gameAsset_foreground = row.gameAsset_foreground,
                 ),
                 runTimeEntities = rows.groupBy { it.runTime }.map { RunTimeEntity(it.key) },
-                developers = rows.groupBy { it.developer_id }.mapNotNull { it.key }.map { GameDeveloperEntity(row.game_id, it) },
-                publishers = rows.groupBy { it.publisher_id}.mapNotNull { it.key } .map{ GamePublisherEntity(row.game_id, it) },
+                developers = rows.groupBy { it.gameId }.mapNotNull { row.gameDeveloper_developerId }.map { GameDeveloperEntity(row.game_id, row.gameDeveloper_developerId!!) },
+                publishers = rows.groupBy { it.gameId }.mapNotNull { row.gamePublisher_publisherId } .map{ GamePublisherEntity(row.game_id, row.gamePublisher_publisherId!!) },
             )
         }
     }
