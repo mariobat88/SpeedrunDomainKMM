@@ -40,7 +40,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -57,7 +56,7 @@ import com.codebox.speedrun.domain.core.ui.RoundedCornerBox
 import com.codebox.speedrun.domain.core.ui.SpeedrunScreen
 import com.codebox.speedrun.domain.core.ui.Tile
 import com.codebox.speedrun.domain.data.common.enums.RunTimeEnum
-import com.codebox.speedrun.domain.di.SpeedrunApplicationEntryPoint
+import com.codebox.speedrun.domain.di.appComponent
 import com.codebox.speedrun.domain.shared.feature.game.GameViewModel
 import com.codebox.speedrun.domain.shared.feature.game.Intent
 import com.codebox.speedrun.domain.shared.feature.game.ViewState
@@ -72,7 +71,7 @@ internal fun GameScreen(
     gameId: String,
     gameNavigator: GameNavigator,
 ) {
-    val appComponent = (LocalContext.current.applicationContext as SpeedrunApplicationEntryPoint).appComponent
+    val appComponent = appComponent()
     val gameViewModel = speedrunViewModel { GameViewModel.create(appComponent, gameId, gameNavigator) }
     GameScreen(gameViewModel)
 }
@@ -216,6 +215,7 @@ fun GameScreen(
         )
     }
 }
+
 @Composable
 private fun Header(
     viewState: ViewState,
@@ -230,6 +230,7 @@ private fun Header(
             is Loading -> {
                 LinearProgressIndicator(modifier = Modifier.align(Alignment.Center))
             }
+
             is Success -> {
                 SubcomposeAsyncImage(
                     model = gameAsync().assets?.coverLarge,
@@ -331,6 +332,7 @@ private fun Header(
                     }
                 }
             }
+
             else -> {}
         }
     }
@@ -353,7 +355,10 @@ private fun GameInfo(
             ),
             color = MaterialTheme.colorScheme.onBackground,
         )
-        AnimatedVisibility(visible = viewState.developersAsync() != null && viewState.developersAsync()!!.isNotEmpty()) {
+        AnimatedVisibility(
+            visible = viewState.developersAsync() != null && viewState.developersAsync()!!
+                .isNotEmpty()
+        ) {
             Text(
                 text = stringResource(
                     GameScreenResources.string.developed_by,
@@ -362,7 +367,10 @@ private fun GameInfo(
                 color = MaterialTheme.colorScheme.onBackground,
             )
         }
-        AnimatedVisibility(visible = viewState.publishersAsync() != null && viewState.publishersAsync()!!.isNotEmpty()) {
+        AnimatedVisibility(
+            visible = viewState.publishersAsync() != null && viewState.publishersAsync()!!
+                .isNotEmpty()
+        ) {
             Text(
                 text = stringResource(
                     GameScreenResources.string.published_by,
@@ -422,7 +430,7 @@ private fun Runtime(
         Spacer(modifier = Modifier.width(4.dp))
         Text(
             text = runTime.name.lowercase(),
-                //.capitalized(),
+            //.capitalized(),
             color = MaterialTheme.colorScheme.onBackground,
         )
     }

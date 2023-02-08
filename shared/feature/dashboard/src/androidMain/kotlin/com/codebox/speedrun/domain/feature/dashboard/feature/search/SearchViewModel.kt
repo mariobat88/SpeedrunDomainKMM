@@ -101,6 +101,17 @@ actual class SearchViewModel actual constructor(
                 }
             }
 
+        val clearSearchIntent = intents.filterIsInstance<Intent.ClearSearch>()
+            .onEach {
+                if (viewState.value.selectedTab == ViewState.TAB.GAMES) {
+                    gameSearchTerm = ""
+                    searchTerm = ""
+                } else {
+                    playerSearchTerm = ""
+                    searchTerm = ""
+                }
+            }
+
         val selectedTabIntent = intents.filterIsInstance<Intent.TabSelected>()
             .onEach { intent ->
                 reduce { it.copy(selectedTab = tabEnums[intent.index]) }
@@ -116,6 +127,7 @@ actual class SearchViewModel actual constructor(
 
         return merge(
             searchIntent,
+            clearSearchIntent,
             selectedTabIntent,
             navigateToGameScreenIntent,
         )

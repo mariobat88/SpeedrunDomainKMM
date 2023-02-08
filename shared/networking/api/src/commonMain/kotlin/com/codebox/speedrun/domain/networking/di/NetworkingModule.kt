@@ -13,8 +13,10 @@ import io.github.aakira.napier.Napier
 import io.ktor.client.*
 import io.ktor.client.plugins.*
 import io.ktor.client.plugins.cache.*
+import io.ktor.client.plugins.cache.storage.*
 import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.client.plugins.logging.*
+import io.ktor.client.request.headers
 import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
 import kotlinx.serialization.ExperimentalSerializationApi
@@ -22,8 +24,11 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.polymorphic
 import kotlinx.serialization.modules.subclass
+import java.nio.file.*
 
-class NetworkingModule {
+class NetworkingModule(
+    private val versionName: String,
+) {
 
     @OptIn(ExperimentalSerializationApi::class)
     private val httpClient by lazy {
@@ -45,7 +50,7 @@ class NetworkingModule {
                         ignoreUnknownKeys = true
                         explicitNulls = false
                         serializersModule = SerializersModule {
-                            polymorphic(PlayerResponse::class){
+                            polymorphic(PlayerResponse::class) {
                                 subclass(UserResponse::class)
                                 subclass(GuestResponse::class)
                             }
@@ -53,14 +58,24 @@ class NetworkingModule {
                     }
                 )
             }
-            install(HttpCache)
+            install(HttpCache) {
+                //val cacheFile = File.cre
+            }
             defaultRequest {
                 url {
                     host = "www.speedrun.com/api/v1"
                     protocol = URLProtocol.HTTPS
                 }
             }
+        }.apply {
+            plugin(HttpSend).intercept { request ->
+                request.headers {
+                    append("user-agent", "SpeedrunDomain/$versionName")
+                }
+                execute(request)
+            }
         }
+
     }
 
     val categoriesApiService by lazy {

@@ -25,7 +25,12 @@ kotlin {
                 implementation(projects.shared.networking.api)
             }
         }
-
+        val androidMain by getting {
+            dependencies {
+                implementation(libs.androidx.compose.runtime)
+                implementation(libs.androidx.lifecycle.compose.runtime)
+            }
+        }
         val iosX64Main by getting
         val iosArm64Main by getting
         val iosSimulatorArm64Main by getting
@@ -35,5 +40,15 @@ kotlin {
             iosArm64Main.dependsOn(this)
             iosSimulatorArm64Main.dependsOn(this)
         }
+    }
+}
+
+android {
+    buildFeatures {
+        compose = true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = libs.versions.androidxComposeCompiler.get()
     }
 }

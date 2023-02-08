@@ -15,7 +15,11 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material3.Divider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
@@ -43,6 +47,7 @@ import com.codebox.speedrun.domain.core.framework.Compose
 import com.codebox.speedrun.domain.core.framework.speedrunViewModel
 import com.codebox.speedrun.domain.core.ui.RoundedCornerBox
 import com.codebox.speedrun.domain.di.SpeedrunApplicationEntryPoint
+import com.codebox.speedrun.domain.di.appComponent
 import com.codebox.speedrun.domain.feature.dashboard.feature.search.navigation.SearchNavigator
 import com.codebox.speedrun.domain.kit.player.ui.UserRow
 import com.google.accompanist.placeholder.PlaceholderHighlight
@@ -55,7 +60,7 @@ import com.codebox.speedrun.domain.feature.dashboard.R as DashboardResources
 fun SearchScreen(
     searchNavigator: SearchNavigator,
 ) {
-    val appComponent = (LocalContext.current.applicationContext as SpeedrunApplicationEntryPoint).appComponent
+    val appComponent = appComponent()
     val searchViewModel = speedrunViewModel { SearchViewModel.create(appComponent, searchNavigator) }
     SearchScreen(searchViewModel)
 }
@@ -115,7 +120,12 @@ private fun SearchScreen(
                     singleLine = true,
                     colors = TextFieldDefaults.textFieldColors(
                         focusedIndicatorColor = Color.Transparent
-                    )
+                    ),
+                    trailingIcon = {
+                        IconButton(onClick = { intentChannel.tryEmit(Intent.ClearSearch) }) {
+                            Icon(imageVector = Icons.Default.Clear, contentDescription = null)
+                        }
+                     }
                 )
                 Spacer(modifier = Modifier.height(sidePadding))
             }

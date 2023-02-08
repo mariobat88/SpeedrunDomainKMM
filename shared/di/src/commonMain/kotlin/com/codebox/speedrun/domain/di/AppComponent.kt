@@ -22,11 +22,12 @@ interface AppComponent {
 }
 
 class AppComponentImpl(
+    private val versionName:String,
     private val databaseDriverFactory: DatabaseDriverFactory
 ) : AppComponent {
 
     private val networkingModule by lazy {
-        NetworkingModule()
+        NetworkingModule(versionName)
     }
 
     private val databaseModule by lazy {
