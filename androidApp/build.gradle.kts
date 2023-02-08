@@ -31,23 +31,8 @@ android {
 }
 
 dependencies {
-    val composeBom = platform(libs.androidx.compose.bom)
-    implementation(composeBom)
-
-    implementation(libs.accompanist.systemuicontroller)
     implementation(libs.androidx.activity.compose)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.androidx.compose.foundation)
-    implementation(libs.androidx.compose.foundation.layout)
-    implementation(libs.androidx.compose.material)
-    implementation(libs.androidx.compose.material3)
-    implementation(libs.androidx.compose.runtime)
-    implementation(libs.androidx.compose.ui.tooling)
-    implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.core.splashscreen)
-    implementation(libs.androidx.hilt.navigation.compose)
-    implementation(libs.androidx.navigation.compose)
-    implementation(libs.material3)
 
     implementation(projects.shared.di)
     implementation(projects.shared.data.database)
