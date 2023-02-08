@@ -32,7 +32,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -46,7 +45,6 @@ import coil.compose.AsyncImage
 import com.codebox.speedrun.domain.core.framework.Compose
 import com.codebox.speedrun.domain.core.framework.speedrunViewModel
 import com.codebox.speedrun.domain.core.ui.RoundedCornerBox
-import com.codebox.speedrun.domain.di.SpeedrunApplicationEntryPoint
 import com.codebox.speedrun.domain.di.appComponent
 import com.codebox.speedrun.domain.feature.dashboard.feature.search.navigation.SearchNavigator
 import com.codebox.speedrun.domain.kit.player.ui.UserRow
