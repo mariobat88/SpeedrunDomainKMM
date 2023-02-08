@@ -5,6 +5,7 @@ import com.codebox.speedrun.domain.core.navigation.StateNavigator
 import com.codebox.speedrun.domain.shared.feature.app.di.AppFeatureComponentImpl
 import com.codebox.speedrun.domain.shared.feature.app.navigation.AppNavigator
 import com.codebox.speedrun.domain.shared.feature.game.navigation.GameNavigation
+import com.codebox.speedrun.domain.shared.feature.leaderboards.navigation.LeaderboardsNavigation
 
 class AppViewModel constructor(
     private val stateNavigator: StateNavigator,
@@ -25,12 +26,12 @@ class AppViewModel constructor(
     }
 
     override fun navigateToLeaderboardsScreen(gameId: String) {
-       // stateNavigator.navigateToRoute(LeaderboardsNavigation(gameId))
+       stateNavigator.navigateToRoute(LeaderboardsNavigation(gameId))
     }
 
-//    override fun navigateToRunScreen(runId: String) {
-//        stateNavigator.navigateToRoute(RunNavigation(runId))
-//    }
+    override fun navigateToRunScreen(runId: String) {
+        //stateNavigator.navigateToRoute(RunNavigation(runId))
+    }
 //
 //    override fun navigateToPlayerScreen(playerId: String) {
 //        stateNavigator.navigateToRoute(PlayerNavigation(playerId))

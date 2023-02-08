@@ -1,5 +1,8 @@
 @file:Suppress("UnstableApiUsage")
 
+include(":feature:leaderboards")
+
+
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 enableFeaturePreview("VERSION_CATALOGS")
 
@@ -40,6 +43,7 @@ include(":shared:core:wrapper:dispatchers")
 include(":shared:feature:app")
 include(":shared:feature:dashboard")
 include(":shared:feature:game")
+include(":shared:feature:leaderboards")
 include(":shared:data:common")
 include(":shared:data:database")
 include(":shared:data:datasource")

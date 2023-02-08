@@ -23,6 +23,7 @@ kotlin {
                 implementation(projects.shared.data.repo)
                 implementation(projects.shared.feature.dashboard)
                 implementation(projects.shared.feature.game)
+                implementation(projects.shared.feature.leaderboards)
                 implementation(projects.shared.di)
                 implementation(libs.kotlinx.coroutines)
             }

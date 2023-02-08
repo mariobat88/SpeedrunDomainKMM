@@ -1,0 +1,7 @@
+package com.codebox.speedrun.domain.data.repo.platforms.model
+
+data class PlatformModel(
+    val id: String,
+    val name: String,
+    val released: Int,
+)

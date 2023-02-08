@@ -4,12 +4,12 @@ plugins {
 
 kotlin {
     cocoapods {
-        summary = "Game feature module"
+        summary = "Leaderboards feature module"
         homepage = "Link to the Shared Module homepage"
         version = "1.0"
         ios.deploymentTarget = "14.1"
         framework {
-            baseName = "game"
+            baseName = "leaderboards"
             isStatic = false
             linkerOpts.add("-lsqlite3")
         }

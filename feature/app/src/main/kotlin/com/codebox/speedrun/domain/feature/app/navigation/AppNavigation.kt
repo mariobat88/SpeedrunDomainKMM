@@ -8,6 +8,7 @@ import com.codebox.speedrun.domain.core.navigation.StateNavigator
 import com.codebox.speedrun.domain.feature.dashboard.navigation.DashboardNavigation
 import com.codebox.speedrun.domain.feature.dashboard.navigation.dashboardNavigation
 import com.codebox.speedrun.domain.feature.game.navigation.gameNavigation
+import com.codebox.speedrun.domain.feature.leaderboards.navigation.leaderboardsNavigation
 import com.codebox.speedrun.domain.shared.feature.app.navigation.AppNavigator
 
 @Composable
@@ -21,7 +22,7 @@ fun <T> AppNavigation(
     ) {
         dashboardNavigation(mainNavigator)
         gameNavigation(mainNavigator)
-        //leaderboardsNavigation(mainNavigator)
+        leaderboardsNavigation(mainNavigator)
         //runNavigation(mainNavigator)
         //playerNavigation(mainNavigator)
     }

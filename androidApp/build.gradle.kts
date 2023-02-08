@@ -52,16 +52,4 @@ dependencies {
     implementation(projects.shared.di)
     implementation(projects.shared.data.database)
     implementation(projects.feature.app)
-    implementation(projects.feature.dashboard)
-//    implementation(projects.core.navigation)
-//    implementation(projects.core.wrapper.logging)
-//    implementation(projects.data.database)
-//    implementation(projects.data.datasource)
-//    implementation(projects.feature.dashboard)
-//    implementation(projects.feature.game)
-//    implementation(projects.feature.leaderboards)
-//    implementation(projects.feature.player)
-//    implementation(projects.feature.run)
-//    implementation(projects.networking.core)
-//
 }
