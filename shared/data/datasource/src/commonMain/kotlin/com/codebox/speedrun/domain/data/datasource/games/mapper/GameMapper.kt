@@ -5,7 +5,7 @@ import com.codebox.speedrun.domain.data.database.GameAssetsEntity
 import com.codebox.speedrun.domain.data.database.GameEntity
 import com.codebox.speedrun.domain.data.database.GameNamesEntity
 import com.codebox.speedrun.domain.data.database.GameRuleSetEntity
-import com.codebox.speedrun.domain.data.database.result.GameResult
+import com.codebox.speedrun.domain.data.database.GetGameById
 import com.codebox.speedrun.domain.data.datasource.common.mapper.toModel
 import com.codebox.speedrun.domain.data.datasource.pagination.mapper.toModel
 import com.codebox.speedrun.domain.data.repo.common.model.NamesModel
@@ -92,39 +92,42 @@ fun Assets.toEntity(gameId: String) = GameAssetsEntity(
     gameAsset_foreground = foreground.uri,
 )
 
-fun GameResult.toGameModel(): GameModel {
+fun List<GetGameById>.toGameModel(): GameModel {
+    val row = this[0]
     return GameModel(
-        id = gameEntity.game_id,
-        names = gameNamesEntity.toModel(),
-        boostReceived = gameEntity.game_boostReceived.toInt(),
-        boostDistinctDonors = gameEntity.game_boostDistinctDonors.toInt(),
-        abbreviation = gameEntity.game_abbreviation,
-        weblink = gameEntity.game_weblink,
-        discord = gameEntity.game_discord,
-        released = gameEntity.game_released.toInt(),
-        releaseDate = gameEntity.game_releaseDate,
-        ruleset = gameRuleSetEntity.toModel(runTimeEntities.map { it.toRunTimeEnum() }),
-        romhack = gameEntity.game_romhack,
+        id = row.game_id,
+        names = row.toNames(),
+        boostReceived = row.game_boostReceived.toInt(),
+        boostDistinctDonors = row.game_boostDistinctDonors.toInt(),
+        abbreviation = row.game_abbreviation,
+        weblink = row.game_weblink,
+        discord = row.game_discord,
+        released = row.game_released.toInt(),
+        releaseDate = row.game_releaseDate,
+        ruleset = row.toGameRuleSet(this.map { it.runTime }),
+        romhack = row.game_romhack,
         gametypes = emptyList(),
         platforms = emptyList(),
         regions = emptyList(),
         genres = emptyList(),
         engines = emptyList(),
-        developers = developers.map { it.gameDeveloper_developerId },
-        publishers = publishers.map { it.gamePublisher_publisherId },
+        developers = this.groupBy { it.gameId }.mapNotNull { row.developer_name },
+        publishers = this.groupBy { it.gameId }.mapNotNull { row.publisher_name },
         moderators = emptyMap(),
-        created = gameEntity.game_created,
-        assets = gameAssetsEntity.toModel(),
+        created = row.game_created,
+        assets = row.toAssets(),
     )
 }
 
-private fun GameNamesEntity.toModel() = NamesModel(
+private fun GetGameById.toNames() = NamesModel(
     international = gameName_international,
     japanese = gameName_international,
     twitch = gameName_twitch,
 )
 
-private fun GameRuleSetEntity.toModel(runTimes: List<RunTimeEnum>? = null) = GameModel.Ruleset(
+private fun GetGameById.toGameRuleSet(
+    runTimes: List<RunTimeEnum>?,
+) = GameModel.Ruleset(
     showMilliseconds = gameRuleSet_showMilliseconds,
     requireVerification = gameRuleSet_requireVerification,
     requireVideo = gameRuleSet_requireVideo,
@@ -133,7 +136,7 @@ private fun GameRuleSetEntity.toModel(runTimes: List<RunTimeEnum>? = null) = Gam
     emulatorsAllowed = gameRuleSet_emulatorsAllowed,
 )
 
-private fun GameAssetsEntity.toModel() = GameModel.Assets(
+private fun GetGameById.toAssets() = GameModel.Assets(
     logo = gameAsset_logo,
     coverTiny = gameAsset_coverTiny,
     coverSmall = gameAsset_coverSmall,

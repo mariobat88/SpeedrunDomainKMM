@@ -6,6 +6,9 @@ import com.squareup.sqldelight.EnumColumnAdapter
 class Database(databaseDriverFactory: DatabaseDriverFactory) {
     private val database = SpeedrunDomainDatabase(
         driver = databaseDriverFactory.createDriver(),
+        CategoryEntityAdapter = CategoryEntity.Adapter(
+            category_typeAdapter = EnumColumnAdapter()
+        ),
         GameRuleSetEntityAdapter = GameRuleSetEntity.Adapter(
             gameRuleSet_defaultTimeAdapter = EnumColumnAdapter()
         ),

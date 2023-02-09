@@ -2,7 +2,11 @@ package com.codebox.speedrun.domain.data.database.dao
 
 import com.codebox.speedrun.domain.data.database.CategoryEntity
 import com.codebox.speedrun.domain.data.database.CategoryPlayerEntity
+import com.codebox.speedrun.domain.data.database.ObserveCategoriesByGameId
 import com.codebox.speedrun.domain.data.database.SpeedrunDomainDatabase
+import com.squareup.sqldelight.runtime.coroutines.asFlow
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
 class CategoryDao(
     database: SpeedrunDomainDatabase
@@ -13,13 +17,13 @@ class CategoryDao(
         dbQuery.transaction {
             categories.forEach {
                 dbQuery.upsertCategory(
-                    id = it.id,
-                    name = it.name,
-                    weblink = it.weblink,
-                    type = it.type,
-                    rules = it.rules,
-                    miscellaneous = it.miscellaneous,
-                    gameId = it.gameId
+                    category_id = it.category_id,
+                    category_name = it.category_name,
+                    category_weblink = it.category_weblink,
+                    category_type = it.category_type,
+                    category_rules = it.category_rules,
+                    category_miscellaneous = it.category_miscellaneous,
+                    category_gameId = it.category_gameId
                 )
             }
         }
@@ -29,11 +33,15 @@ class CategoryDao(
         dbQuery.transaction {
             categoryPlayers.forEach { categoryPlayer ->
                 dbQuery.upsertCategoryPlayer(
-                    categoryId = categoryPlayer.categoryId,
-                    type = categoryPlayer.type,
-                    value_ = categoryPlayer.value_
+                    categoryPlayer_categoryId = categoryPlayer.categoryPlayer_categoryId,
+                    categoryPlayer_type = categoryPlayer.categoryPlayer_type,
+                    categoryPlayer_value = categoryPlayer.categoryPlayer_value
                 )
             }
         }
+    }
+
+    fun observeCategoriesByGameId(gameId: String): Flow<List<ObserveCategoriesByGameId>> {
+        return dbQuery.observeCategoriesByGameId(gameId).asFlow().map { it.executeAsList() }
     }
 }

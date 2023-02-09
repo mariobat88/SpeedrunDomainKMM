@@ -4,4 +4,6 @@ plugins {
 
 dependencies{
     api(projects.shared.feature.leaderboards)
+    implementation(libs.accompanist.pager)
+    implementation(libs.accompanist.pagerIndicators)
 }

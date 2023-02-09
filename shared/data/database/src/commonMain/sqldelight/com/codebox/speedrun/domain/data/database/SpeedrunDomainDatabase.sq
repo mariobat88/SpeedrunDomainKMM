@@ -1,28 +1,34 @@
 import com.codebox.speedrun.domain.data.common.enums.RunTimeEnum;
+import com.codebox.speedrun.domain.data.common.enums.RunTypeEnum;
 
 CREATE TABLE CategoryEntity(
-    id              TEXT NOT NULL PRIMARY KEY,
-    name            TEXT    NOT NULL,
-    weblink         TEXT    NOT NULL,
-    type            TEXT    NOT NULL,
-    rules           TEXT,
-    miscellaneous   INTEGER AS Boolean DEFAULT NULL,
-    gameId          TEXT    NOT NULL
+    category_id              TEXT NOT NULL PRIMARY KEY,
+    category_name            TEXT    NOT NULL,
+    category_weblink         TEXT    NOT NULL,
+    category_type            TEXT AS RunTypeEnum NOT NULL,
+    category_rules           TEXT,
+    category_miscellaneous   INTEGER AS Boolean NOT NULL,
+    category_gameId          TEXT    NOT NULL
 );
 
 upsertCategory:
-INSERT OR REPLACE INTO CategoryEntity(id, name, weblink, type, rules, miscellaneous, gameId)
+INSERT OR REPLACE INTO CategoryEntity(category_id, category_name, category_weblink, category_type, category_rules, category_miscellaneous, category_gameId)
 VALUES (?, ?, ?, ?, ?, ?, ?);
 
 CREATE TABLE CategoryPlayerEntity(
-    categoryId  TEXT NOT NULL PRIMARY KEY,
-    type        TEXT NOT NULL,
-    value       INTEGER NOT NULL
+    categoryPlayer_categoryId  TEXT NOT NULL PRIMARY KEY,
+    categoryPlayer_type        TEXT NOT NULL ,
+    categoryPlayer_value       INTEGER NOT NULL
 );
 
 upsertCategoryPlayer:
-INSERT OR REPLACE INTO CategoryPlayerEntity(categoryId, type, value)
+INSERT OR REPLACE INTO CategoryPlayerEntity(categoryPlayer_categoryId, categoryPlayer_type, categoryPlayer_value)
 VALUES (?, ?, ?);
+
+observeCategoriesByGameId:
+SELECT * FROM CategoryEntity
+LEFT JOIN CategoryPlayerEntity ON CategoryPlayerEntity.categoryPlayer_categoryId = CategoryEntity.category_id
+WHERE CategoryEntity.category_gameId = ?;
 
 CREATE TABLE GameEntity(
     game_id                  TEXT NOT NULL PRIMARY KEY,

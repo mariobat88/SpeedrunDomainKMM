@@ -19,6 +19,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(projects.shared.core.framework)
+                api(projects.shared.data.common)
                 api(projects.shared.data.repo)
                 implementation(libs.kotlinx.coroutines)
                 implementation(projects.shared.core.navigation)

@@ -2,12 +2,14 @@ package com.codebox.speedrun.domain.shared.feature.leaderboards
 
 import com.codebox.speedrun.domain.core.framework.SpeedrunViewModel
 import com.codebox.speedrun.domain.core.wrapper.dispatchers.DispatcherProvider
+import com.codebox.speedrun.domain.data.common.enums.RunTypeEnum
 import com.codebox.speedrun.domain.data.repo.categories.CategoriesRepository
 import com.codebox.speedrun.domain.di.AppComponent
 import com.codebox.speedrun.domain.shared.feature.leaderboards.di.LeaderboardsFeatureComponentImpl
 import com.codebox.speedrun.domain.shared.feature.leaderboards.navigation.LeaderboardsNavigator
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.filterIsInstance
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.merge
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
@@ -40,16 +42,16 @@ class LeaderboardsViewModel(
         scope.launch(dispatcherProvider.main()) {
             launch {
                 categoriesRepository.refreshCategoriesByGame(gameId)
-//                categoriesRepository.observeCategoriesByGame(gameId)
-//                    .map { it.filter { it.type == RunTypeEnum.PER_GAME } }
-//                    .asAsync()
-//                    .collect { categoriesAsync ->
-//                        reduce {
-//                            it.copy(
-//                                categoriesAsync = categoriesAsync
-//                            )
-//                        }
-//                    }
+                categoriesRepository.observeCategoriesByGame(gameId)
+                    .map { it.filter { it.type == RunTypeEnum.PER_GAME } }
+                    .asAsync()
+                    .collect { categoriesAsync ->
+                        reduce {
+                            it.copy(
+                                categoriesAsync = categoriesAsync
+                            )
+                        }
+                    }
             }
         }
     }
