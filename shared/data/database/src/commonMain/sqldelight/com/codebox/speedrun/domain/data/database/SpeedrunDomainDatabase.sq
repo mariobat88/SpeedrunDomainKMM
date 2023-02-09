@@ -174,68 +174,68 @@ INSERT OR REPLACE INTO PublisherEntity(publisher_id, publisher_name)
 VALUES (?, ?);
 
 CREATE TABLE PlayerEntity(
-     id     TEXT NOT NULL PRIMARY KEY,
-     rel    TEXT NOT NULL
+     player_id     TEXT NOT NULL PRIMARY KEY,
+     player_rel    TEXT NOT NULL
 );
 
 upsertPlayer:
-INSERT OR REPLACE INTO PlayerEntity(id, rel)
+INSERT OR REPLACE INTO PlayerEntity(player_id, player_rel)
 VALUES (?, ?);
 
 CREATE TABLE UserEntity(
-     id             TEXT NOT NULL PRIMARY KEY,
-     weblink        TEXT NOT NULL,
-     role           TEXT NOT NULL,
-     signup         TEXT,
-     location       TEXT,
-     twitch         TEXT,
-     hitbox         TEXT,
-     youtube        TEXT,
-     twitter        TEXT,
-     speedrunslive  TEXT,
-     icon           TEXT,
-     supporterIcon  TEXT,
-     image          TEXT,
-     FOREIGN KEY (id) REFERENCES PlayerEntity(id)
+     user_id           TEXT NOT NULL PRIMARY KEY,
+     user_weblink        TEXT NOT NULL,
+     user_role           TEXT NOT NULL,
+     user_signup         TEXT,
+     user_location       TEXT,
+     user_twitch         TEXT,
+     user_hitbox         TEXT,
+     user_youtube        TEXT,
+     user_twitter        TEXT,
+     user_speedrunslive  TEXT,
+     user_icon           TEXT,
+     user_supporterIcon  TEXT,
+     user_image          TEXT,
+     FOREIGN KEY (user_id) REFERENCES PlayerEntity(player_id)
 );
 
 upsertUser:
-INSERT OR REPLACE INTO UserEntity(id, weblink, role, signup, location, twitch, hitbox, youtube, twitter, speedrunslive, icon, supporterIcon, image)
+INSERT OR REPLACE INTO UserEntity(user_id, user_weblink, user_role, user_signup, user_location, user_twitch, user_hitbox, user_youtube, user_twitter, user_speedrunslive, user_icon, user_supporterIcon, user_image)
 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
 
 CREATE TABLE UserNamesEntity(
-    userId          TEXT NOT NULL PRIMARY KEY,
-    international   TEXT NOT NULL,
-    japanese        TEXT
+    userName_userId          TEXT NOT NULL PRIMARY KEY,
+    userName_international   TEXT NOT NULL,
+    userName_japanese        TEXT
 );
 
 upsertUserNames:
-INSERT OR REPLACE INTO UserNamesEntity(userId, international, japanese)
+INSERT OR REPLACE INTO UserNamesEntity(userName_userId, userName_international, userName_japanese)
 VALUES (?, ?, ?);
 
 CREATE TABLE UserNamesStyleEntity(
-    userId          TEXT NOT NULL PRIMARY KEY,
-    style           TEXT NOT NULL,
-    colorLight      TEXT,
-    colorDark       TEXT,
-    colorFromLight  TEXT,
-    colorFromDark   TEXT,
-    colorToLight    TEXT,
-    colorToDark     TEXT
+    userNameStyle_userId          TEXT NOT NULL PRIMARY KEY,
+    userNameStyle_style           TEXT NOT NULL,
+    userNameStyle_colorLight      TEXT,
+    userNameStyle_colorDark       TEXT,
+    userNameStyle_colorFromLight  TEXT,
+    userNameStyle_colorFromDark   TEXT,
+    userNameStyle_colorToLight    TEXT,
+    userNameStyle_colorToDark     TEXT
 );
 
 upsertUserNameStyles:
-INSERT OR REPLACE INTO UserNamesStyleEntity(userId, style, colorLight, colorDark, colorFromLight, colorFromDark, colorToLight, colorToDark)
+INSERT OR REPLACE INTO UserNamesStyleEntity(userNameStyle_userId, userNameStyle_style, userNameStyle_colorLight, userNameStyle_colorDark, userNameStyle_colorFromLight, userNameStyle_colorFromDark, userNameStyle_colorToLight, userNameStyle_colorToDark)
 VALUES (?, ?, ?, ?, ?, ?, ?, ?);
 
 CREATE TABLE GuestEntity(
-    id      TEXT NOT NULL PRIMARY KEY,
-    name    TEXT,
-    FOREIGN KEY (id) REFERENCES PlayerEntity(id)
+    guest_id      TEXT NOT NULL PRIMARY KEY,
+    guest_name    TEXT,
+    FOREIGN KEY (guest_id) REFERENCES PlayerEntity(player_id)
 );
 
 upsertGuests:
-INSERT OR REPLACE INTO GuestEntity(id, name)
+INSERT OR REPLACE INTO GuestEntity(guest_id, guest_name)
 VALUES (?, ?);
 
 CREATE TABLE LocationEntity(
@@ -261,3 +261,139 @@ CREATE TABLE UserLocationEntity(
 upsertUserLocation:
 INSERT OR REPLACE INTO UserLocationEntity(userId, locationId)
 VALUES (?, ?);
+
+CREATE TABLE LeaderboardEntity(
+    leaderboard_id          TEXT PRIMARY KEY,
+    leaderboard_weblink     TEXT NOT NULL,
+    leaderboard_gameId      TEXT NOT NULL,
+    leaderboard_categoryId  TEXT NOT NULL,
+    leaderboard_level       TEXT ,
+    leaderboard_platform    TEXT ,
+    leaderboard_region      TEXT ,
+    leaderboard_emulators   INTEGER AS Boolean,
+    leaderboard_videoOnly   INTEGER AS Boolean NOT NULL,
+    leaderboard_timing      TEXT AS RunTimeEnum NOT NULL
+);
+
+upsertLeaderboard:
+INSERT OR REPLACE INTO LeaderboardEntity(leaderboard_id, leaderboard_weblink, leaderboard_gameId, leaderboard_categoryId, leaderboard_level, leaderboard_platform, leaderboard_region, leaderboard_emulators, leaderboard_videoOnly, leaderboard_timing)
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+
+CREATE TABLE LeaderboardRunEntity(
+    leaderboardRun_leaderboardId    TEXT NOT NULL,
+    leaderboardRun_runId            TEXT NOT NULL
+);
+
+upsertLeaderboardRun:
+INSERT OR REPLACE INTO LeaderboardRunEntity(leaderboardRun_leaderboardId, leaderboardRun_runId)
+VALUES (?, ?);
+
+CREATE TABLE PlaceEntity(
+    place_runId TEXT PRIMARY KEY,
+    place_place INTEGER NOT NULL
+);
+
+upsertPlace:
+INSERT OR REPLACE INTO PlaceEntity(place_runId, place_place)
+VALUES (?, ?);
+
+CREATE TABLE RunEntity(
+    run_id          TEXT PRIMARY KEY,
+    run_weblink     TEXT NOT NULL,
+    run_gameId      TEXT NOT NULL,
+    run_level       TEXT,
+    run_categoryId  TEXT NOT NULL,
+    run_comment     TEXT,
+    run_date        TEXT,
+    run_submitted   TEXT
+);
+
+upsertRun:
+INSERT OR REPLACE INTO RunEntity(run_id, run_weblink, run_gameId, run_level, run_categoryId, run_comment, run_date, run_submitted)
+VALUES (?, ?, ?, ?, ?, ?, ?, ?);
+
+CREATE TABLE RunStatusEntity(
+    runStatus_runId         TEXT PRIMARY KEY,
+    runStatus_status        TEXT NOT NULL,
+    runStatus_examiner      TEXT,
+    runStatus_verifyDate    TEXT,
+    FOREIGN KEY (runStatus_runId) REFERENCES RunEntity (run_id)
+);
+
+upsertRunStatus:
+INSERT OR REPLACE INTO RunStatusEntity(runStatus_runId, runStatus_status, runStatus_examiner, runStatus_verifyDate)
+VALUES (?, ?, ?, ?);
+
+CREATE TABLE RunTimesEntity(
+    runTimes_runId              TEXT PRIMARY KEY,
+    runTimes_primary            TEXT  NOT NULL,
+    runTimes_primaryT           REAL  NOT NULL,
+    runTimes_realtime           TEXT,
+    runTimes_realtimeT          REAL NOT NULL,
+    runTimes_realtimeNoLoads    TEXT,
+    runTimes_realtimeNoLoadsT   REAL NOT NULL,
+    runTimes_ingame             TEXT,
+    runTimes_ingameT            REAL NOT NULL,
+    FOREIGN KEY (runTimes_runId) REFERENCES RunEntity (run_id)
+);
+
+upsertRunTimes:
+INSERT OR REPLACE INTO RunTimesEntity(runTimes_runId, runTimes_primary, runTimes_primaryT, runTimes_realtime, runTimes_realtimeT, runTimes_realtimeNoLoads, runTimes_realtimeNoLoadsT, runTimes_ingame, runTimes_ingameT)
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);
+
+CREATE TABLE RunSystemEntity(
+    runSystem_runId TEXT PRIMARY KEY,
+    runSystem_platform TEXT,
+    runSystem_emulated INTEGER AS Boolean NOT NULL,
+    runSystem_region TEXT,
+    FOREIGN KEY (runSystem_runId) REFERENCES RunEntity (run_id)
+);
+
+upsertRunSystem:
+INSERT OR REPLACE INTO RunSystemEntity(runSystem_runId, runSystem_platform, runSystem_emulated, runSystem_region)
+VALUES (?, ?, ?, ?);
+
+CREATE TABLE RunPlayerJunctionEntity(
+    runPlayer_runId     TEXT NOT NULL,
+    runPlayer_playerId  TEXT NOT NULL,
+    PRIMARY KEY (runPlayer_runId, runPlayer_playerId)
+);
+
+upsertRunPlayer:
+INSERT OR REPLACE INTO RunPlayerJunctionEntity(runPlayer_runId, runPlayer_playerId)
+VALUES (?, ?);
+
+CREATE TABLE ValueEntity(
+    value_id      TEXT PRIMARY KEY,
+    value_label   TEXT NOT NULL
+);
+
+upsertValue:
+INSERT OR REPLACE INTO ValueEntity(value_id, value_label)
+VALUES (?, ?);
+
+CREATE TABLE RunValueJunctionEntity(
+    runValue_runId      TEXT NOT NULL,
+    runValue_variableId TEXT NOT NULL,
+    runValue_valueId    TEXT NOT NULL,
+    PRIMARY KEY (runValue_runId, runValue_variableId, runValue_valueId)
+);
+
+upsertRunValue:
+INSERT OR REPLACE INTO RunValueJunctionEntity(runValue_runId, runValue_variableId, runValue_valueId)
+VALUES (?, ?, ?);
+
+CREATE TABLE VariableEntity(
+    variable_id             TEXT PRIMARY KEY,
+    variable_name           TEXT NOT NULL,
+    variable_categoryId     TEXT NOT NULL,
+    variable_scope          TEXT NOT NULL,
+    variable_mandatory      INTEGER AS Boolean NOT NULL,
+    variable_userDefined    INTEGER AS Boolean NOT NULL,
+    variable_obsoletes      INTEGER AS Boolean NOT NULL,
+    variable_isSubcategory  INTEGER AS Boolean NOT NULL
+);
+
+upsertVariable:
+INSERT OR REPLACE INTO VariableEntity(variable_id, variable_name, variable_categoryId, variable_scope, variable_mandatory, variable_userDefined, variable_obsoletes, variable_isSubcategory)
+VALUES (?, ?, ?, ?, ?, ?, ?, ?);

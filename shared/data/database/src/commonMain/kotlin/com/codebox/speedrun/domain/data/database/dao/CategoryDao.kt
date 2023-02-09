@@ -13,20 +13,22 @@ class CategoryDao(
 ) {
     private val dbQuery = database.speedrunDomainDatabaseQueries
 
-    fun upsertCategories(categories: List<CategoryEntity>) {
+    fun upsertCategory(category: CategoryEntity) {
         dbQuery.transaction {
-            categories.forEach {
-                dbQuery.upsertCategory(
-                    category_id = it.category_id,
-                    category_name = it.category_name,
-                    category_weblink = it.category_weblink,
-                    category_type = it.category_type,
-                    category_rules = it.category_rules,
-                    category_miscellaneous = it.category_miscellaneous,
-                    category_gameId = it.category_gameId
-                )
-            }
+            dbQuery.upsertCategory(
+                category_id = category.category_id,
+                category_name = category.category_name,
+                category_weblink = category.category_weblink,
+                category_type = category.category_type,
+                category_rules = category.category_rules,
+                category_miscellaneous = category.category_miscellaneous,
+                category_gameId = category.category_gameId
+            )
         }
+    }
+
+    fun upsertCategories(categories: List<CategoryEntity>) {
+        dbQuery.transaction { categories.forEach { upsertCategory(it) } }
     }
 
     fun upsertCategoryPlayer(categoryPlayers: List<CategoryPlayerEntity>) {

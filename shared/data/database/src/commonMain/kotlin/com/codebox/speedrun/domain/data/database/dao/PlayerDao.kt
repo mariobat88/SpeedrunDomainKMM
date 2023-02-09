@@ -10,125 +10,79 @@ class PlayerDao(
     fun upsertPlayer(player: PlayerEntity) {
         dbQuery.transaction {
             dbQuery.upsertPlayer(
-                id = player.id,
-                rel = player.rel,
+                player_id = player.player_id,
+                player_rel = player.player_rel,
             )
         }
     }
 
     fun upsertPlayers(players: List<PlayerEntity>) {
-        dbQuery.transaction {
-            players.forEach {
-                dbQuery.upsertPlayer(
-                    id = it.id,
-                    rel = it.rel,
-                )
-            }
-        }
+        dbQuery.transaction { players.forEach { upsertPlayer(it) } }
     }
 
     fun upsertUser(user: UserEntity) {
         dbQuery.transaction {
             dbQuery.upsertUser(
-                id = user.id,
-                weblink = user.weblink,
-                role = user.role,
-                signup = user.signup,
-                location = user.location,
-                twitch = user.twitch,
-                hitbox = user.hitbox,
-                youtube = user.youtube,
-                twitter = user.twitter,
-                speedrunslive = user.speedrunslive,
-                icon = user.icon,
-                supporterIcon = user.supporterIcon,
-                image = user.image,
+                user_id = user.user_id,
+                user_weblink = user.user_weblink,
+                user_role = user.user_role,
+                user_signup = user.user_signup,
+                user_location = user.user_location,
+                user_twitch = user.user_twitch,
+                user_hitbox = user.user_hitbox,
+                user_youtube = user.user_youtube,
+                user_twitter = user.user_twitter,
+                user_speedrunslive = user.user_speedrunslive,
+                user_icon = user.user_icon,
+                user_supporterIcon = user.user_supporterIcon,
+                user_image = user.user_image,
             )
         }
     }
 
     fun upsertUsers(users: List<UserEntity>) {
-        dbQuery.transaction {
-            users.forEach {
-                dbQuery.upsertUser(
-                    id = it.id,
-                    weblink = it.weblink,
-                    role = it.role,
-                    signup = it.signup,
-                    location = it.location,
-                    twitch = it.twitch,
-                    hitbox = it.hitbox,
-                    youtube = it.youtube,
-                    twitter = it.twitter,
-                    speedrunslive = it.speedrunslive,
-                    icon = it.icon,
-                    supporterIcon = it.supporterIcon,
-                    image = it.image,
-                )
-            }
-        }
+        dbQuery.transaction { users.forEach { upsertUser(it) } }
     }
 
     fun upsertUserName(userName: UserNamesEntity) {
         dbQuery.transaction {
             dbQuery.upsertUserNames(
-                userId = userName.userId,
-                international = userName.international,
-                japanese = userName.japanese,
+                userName_userId = userName.userName_userId,
+                userName_international = userName.userName_international,
+                userName_japanese = userName.userName_japanese,
             )
         }
     }
 
     fun upsertUserNames(userNames: List<UserNamesEntity>) {
-        dbQuery.transaction {
-            userNames.forEach {
-                dbQuery.upsertUserNames(
-                    userId = it.userId,
-                    international = it.international,
-                    japanese = it.japanese,
-                )
-            }
-        }
+        dbQuery.transaction { userNames.forEach { upsertUserName(it) } }
     }
 
     fun upsertUserNameStyle(userNameStyle: UserNamesStyleEntity) {
         dbQuery.transaction {
             dbQuery.upsertUserNameStyles(
-                userId = userNameStyle.userId,
-                style = userNameStyle.style,
-                colorLight = userNameStyle.colorLight,
-                colorDark = userNameStyle.colorDark,
-                colorFromLight = userNameStyle.colorFromLight,
-                colorFromDark = userNameStyle.colorFromDark,
-                colorToLight = userNameStyle.colorToLight,
-                colorToDark = userNameStyle.colorToDark,
+                userNameStyle_userId = userNameStyle.userNameStyle_userId,
+                userNameStyle_style = userNameStyle.userNameStyle_style,
+                userNameStyle_colorLight = userNameStyle.userNameStyle_colorLight,
+                userNameStyle_colorDark = userNameStyle.userNameStyle_colorDark,
+                userNameStyle_colorFromLight = userNameStyle.userNameStyle_colorFromLight,
+                userNameStyle_colorFromDark = userNameStyle.userNameStyle_colorFromDark,
+                userNameStyle_colorToLight = userNameStyle.userNameStyle_colorToLight,
+                userNameStyle_colorToDark = userNameStyle.userNameStyle_colorToDark,
             )
         }
     }
 
     fun upsertUserNameStyles(userNameStyles: List<UserNamesStyleEntity>) {
-        dbQuery.transaction {
-            userNameStyles.forEach {
-                dbQuery.upsertUserNameStyles(
-                    userId = it.userId,
-                    style = it.style,
-                    colorLight = it.colorLight,
-                    colorDark = it.colorDark,
-                    colorFromLight = it.colorFromLight,
-                    colorFromDark = it.colorFromDark,
-                    colorToLight = it.colorToLight,
-                    colorToDark = it.colorToDark,
-                )
-            }
-        }
+        dbQuery.transaction { userNameStyles.forEach { upsertUserNameStyle(it) } }
     }
 
     fun upsertGuests(guests: List<GuestEntity>) {
         dbQuery.transaction {
             guests.forEach {
                 dbQuery.upsertGuests(
-                    id = it.id,
-                    name = it.name,
+                    guest_id = it.guest_id,
+                    guest_name = it.guest_name,
                 )
             }
         }

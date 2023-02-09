@@ -3,6 +3,7 @@ package com.codebox.speedrun.domain.networking.di
 import com.codebox.speedrun.domain.networking.api.categories.CategoriesApiService
 import com.codebox.speedrun.domain.networking.api.developers.DevelopersApiService
 import com.codebox.speedrun.domain.networking.api.games.GamesApiService
+import com.codebox.speedrun.domain.networking.api.leaderboards.LeaderboardsApiService
 import com.codebox.speedrun.domain.networking.api.players.PlayersApiService
 import com.codebox.speedrun.domain.networking.api.players.models.GuestResponse
 import com.codebox.speedrun.domain.networking.api.players.models.PlayerResponse
@@ -96,5 +97,9 @@ class NetworkingModule(
 
     val publishersApiService by lazy {
         PublishersApiService(httpClient)
+    }
+
+    val leaderboardsApiService by lazy {
+        LeaderboardsApiService(httpClient)
     }
 }

@@ -3,11 +3,10 @@ package com.codebox.speedrun.domain.networking.api.players.models
 import com.codebox.speedrun.domain.networking.api.common.LinkResponse
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-
+@Serializable
 sealed class PlayerResponse{
     @SerialName(value = "rel") abstract val rel: String?
 }
-
 @Serializable
 @SerialName("user")
 data class UserResponse(
